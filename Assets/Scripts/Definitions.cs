@@ -9,6 +9,7 @@ public static class Definitions {
     // Game State
     public enum Levels : int { START, GAME, END };
     public enum GameMode : int { PLAYING, PAUSE };
+    public const float DURATION = 600;
 
     // End Screen
     public const int MAX_BEST_PLAYERS = 10;

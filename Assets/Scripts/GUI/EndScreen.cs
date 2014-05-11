@@ -22,8 +22,9 @@ public class EndScreen : MonoBehaviour {
         menuRect = new Rect(Screen.width / 2 - 150, Screen.height / 4, 300, 220 + 10 * Definitions.MAX_BEST_PLAYERS);
         innerRect = new Rect(menuRect.x + 20, menuRect.y, menuRect.width - 40, menuRect.height - 50);
 
+        // para bazar daqui
         GameState.Instance.AddCurrentPlayerToBestScores();
-        GameState.Instance.WritePlayers();
+        GameState.Instance.WritePlayersToFile(Definitions.PLAYERS_FILE);
 	}
 	
 	void Update () {
