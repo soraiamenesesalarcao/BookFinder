@@ -72,7 +72,7 @@ public class GameState : MonoBehaviour {
     public void SetCurrentPlayer(string playerName) {
         CurrentPlayer = new PlayerScore(playerName, 0);
         
-        // cheating
+        // cheating - MUAHAHAHAHAHAH
         CurrentPlayer.Score += 3;
     }
 
