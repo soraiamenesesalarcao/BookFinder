@@ -11,6 +11,25 @@ public static class Definitions {
     public enum GameMode : int { PLAYING, PAUSE };
     public const float DURATION = 600;
 
+    // Values
+    public enum Book : int { ORANGE, YELLOW, BORDEAUX, BLUE};
+
+    public const int MIN_ORANGE = 1;
+    public const int MIN_YELLOW = 1;
+    public const int MIN_BORDEAUX = 1;
+    public const int MIN_BLUE = 1;
+
+    public const int SCORE_ORANGE = 5; 
+    public const int SCORE_YELLOW = 10;
+    public const int SCORE_BORDEAUX = 15;
+    public const int SCORE_BLUE = 20;
+
+    public const int SCORE_COIN = 10;
+    public const int MAX_LIVES = 3;
+    public const int MAX_LIFE = 99;
+
+    public const int DAMAGE_ENEMY_BULLET = 1;
+
     // End Screen
     public const int MAX_BEST_PLAYERS = 10;
 
