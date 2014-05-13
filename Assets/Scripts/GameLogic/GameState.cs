@@ -13,7 +13,6 @@ public class GameState : MonoBehaviour {
 
     public static SortedDictionary<string, PlayerScore> Players;
     public static CharacterInfo CurrentPlayer; 
-    //public static PlayerScore CurrentPlayerScore;
     public static string NewPlayer;
     public static int LastScore;
     public static bool HasWon = true;
@@ -26,12 +25,12 @@ public class GameState : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
         TimeGame = 0;
-        if (GameObject.Find("Player") != null) 
-            CurrentPlayer = GameObject.Find("Player").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
+        if (GameObject.Find("Molly") != null) 
+            CurrentPlayer = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
         if (CurrentPlayer != null) {
             CurrentPlayer.Name = NewPlayer;
             CurrentPlayer.Score = 0;
-            Debug.Log("Novo jogador: " + NewPlayer);
+            if(Definitions.Debug) Debug.Log("Novo jogador: " + NewPlayer);
         }
     }
 

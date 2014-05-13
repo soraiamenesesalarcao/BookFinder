@@ -3,7 +3,25 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Box
+  - Scene
+  - Groucho
+  - Wukong
+  - Turret
+  - Skeleton
+  - Enemies
+  - Torch
+  - Light
+  - Flame
+  - Room
+  - Hall
+  - 
+  - Walls
+  - Prince
+  - Monster
+  - ObstacleFixed
+  - Rooms
+  - 
+  - Room1
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

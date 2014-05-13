@@ -22,16 +22,14 @@ public class HUD : MonoBehaviour {
     void Start() {
         infoRect = new Rect(20, 20, 250, 200);
        
-        //CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
-        if (GameObject.Find("Player") != null)
-            CharacterInstance = GameObject.Find("Player").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
+        if (GameObject.Find("Molly") != null)
+            CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
     }
 
     void Update() {       
 
-        //CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
-        if (CharacterInstance != null && GameObject.Find("Player") != null)
-            CharacterInstance = GameObject.Find("Player").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
+        if (CharacterInstance != null && GameObject.Find("Molly") != null)
+            CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
     }
 
     void OnGUI() {        
