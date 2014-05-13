@@ -3,13 +3,14 @@ using System.Collections;
 
 public class CharacterInfo : MonoBehaviour {
 
-
-    public int NumberOfLives { get; set; }
-    public int Score { get; set; }
-    public ArrayList Inventory;
+    public string Name;
+    public int NumberOfLives;
+    public int Life;
+    public int Score;
+    public Inventory Items;
 	
 	void Start () {
-        Inventory = new ArrayList();
+        Items = new Inventory();
 	}
 	
 	

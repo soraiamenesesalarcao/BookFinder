@@ -23,8 +23,8 @@ public class EndScreen : MonoBehaviour {
         innerRect = new Rect(menuRect.x + 20, menuRect.y, menuRect.width - 40, menuRect.height - 50);
 
         // para bazar daqui
-        GameState.Instance.AddCurrentPlayerToBestScores();
-        GameState.Instance.WritePlayersToFile(Definitions.PLAYERS_FILE);
+        //GameState.Instance.AddCurrentPlayerToBestScores();
+        //GameState.Instance.WritePlayersToFile(Definitions.PLAYERS_FILE);
 	}
 	
 	void Update () {
@@ -44,7 +44,7 @@ public class EndScreen : MonoBehaviour {
         GUILayout.Label(message, LabelStyle);
 
         GUILayout.Space(15);
-        GUILayout.Label("Score: " + GameState.CurrentPlayer.Score, LabelStyle);
+        GUILayout.Label("Score: " + GameState.CurrentPlayerScore.Score, LabelStyle);
 
         GUILayout.Space(15);
         GUILayout.Label("Top " + Definitions.MAX_BEST_PLAYERS + " Scores:", LabelStyle);

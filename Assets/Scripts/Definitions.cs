@@ -9,7 +9,8 @@ public static class Definitions {
     // Game State
     public enum Levels : int { START, GAME, END };
     public enum GameMode : int { PLAYING, PAUSE };
-    public const float DURATION = 600;
+    public const float DURATION = 500;
+    public const float EVENT_DELTA = 5;
 
     // Values
     public enum Book : int { ORANGE, YELLOW, BORDEAUX, BLUE};

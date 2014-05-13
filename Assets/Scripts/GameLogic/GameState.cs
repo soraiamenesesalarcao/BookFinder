@@ -7,17 +7,18 @@ public class GameState : MonoBehaviour {
 
     public static GameState Instance;
 
-    public static HUD HudGUI;
-    public static PauseScreen PauseGUI;
 
     public static Definitions.Levels CurrentLevel;
-    public static Definitions.GameMode CurrentMode;
+    public Definitions.GameMode CurrentMode;
 
     public static SortedDictionary<string, PlayerScore> Players;
-    public static PlayerScore CurrentPlayer;
+    public CharacterInfo CurrentPlayer;
+    public static PlayerScore CurrentPlayerScore;
     public static bool HasWon = true;
 
-    public float TimeGame { get; set; }      
+    public static float TimeGame { get; set; }
+
+    private static float eventTime;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
@@ -25,40 +26,44 @@ public class GameState : MonoBehaviour {
         TimeGame = 0;
     }
 
-	void Start () {        
-        if (CurrentLevel == Definitions.Levels.START) {
-            HudGUI = new HUD();
-            PauseGUI = new PauseScreen();
-            Players = new SortedDictionary<string, PlayerScore>();
-            ReadPlayersFromFile(Definitions.PLAYERS_FILE);
-        }                
-	}
+    void Start() {
+        CurrentMode = Definitions.GameMode.PLAYING;
+    }
     	
 	// Update is called once per frame
 	void Update () {
-	
+        if (CurrentMode == Definitions.GameMode.PLAYING) {
+            TimeGame = Time.time;
+            // outras coisas
+        }
+        HandleInput();
 	}
 
     void OnGUI() {
+        
+    }
 
-        //if (CurrentLevel == Definitions.Levels.GAME) {
-        if (CurrentLevel == Definitions.Levels.END) {
-            HudGUI.Draw();
-
-            if (CurrentMode == Definitions.GameMode.PAUSE) {
-                PauseGUI.Draw();
-            }
+    void HandleInput() {
+        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Escape)) {
+                SwitchPause();
+        }
+        // temp
+        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.E)) {
+                EndGame();
         }
     }
 
     // Game End
     public void EndGame() {
-        // apurar condicoes de vitoria
-        // parar o timer
+        // apurar condicoes de vitoria       
 
-        // to be done here
-        //AddCurrentPlayerToBestScores();
-        //WritePlayersToFile(Definitions.PLAYERS_FILE);
+        // melhores jogadores
+        Players = new SortedDictionary<string, PlayerScore>();
+        ReadPlayersFromFile(Definitions.PLAYERS_FILE);
+        AddCurrentPlayerToBestScores();
+        WritePlayersToFile(Definitions.PLAYERS_FILE);
+
+        // parar o timer
 
         // mudar de cena
         ChangeLevel(Definitions.Levels.END);
@@ -78,23 +83,37 @@ public class GameState : MonoBehaviour {
         Application.LoadLevel((int)level);
     }
 
+    // Pause Game
+    public void SwitchPause() {
+        Debug.Log("entrei");
+        if (CurrentMode == Definitions.GameMode.PLAYING) {
+            Debug.Log("Ola");
+            CurrentMode = Definitions.GameMode.PAUSE;
+            
+        }
+        else {
+            Debug.Log("Adeus");
+            CurrentMode = Definitions.GameMode.PLAYING;
+        }
+    }
+
     // Current Player
     public void SetCurrentPlayer(string playerName) {
-        CurrentPlayer = new PlayerScore(playerName, 0);
+        CurrentPlayerScore = new PlayerScore(playerName, 0);
 
         // cheating - MUAHAHAHAHAHAH
-        CurrentPlayer.Score += 3;
+        CurrentPlayerScore.Score += 4;
     }
 
     public void AddCurrentPlayerToBestScores() {
         PlayerScore ps;
 
-        if (Players.TryGetValue(CurrentPlayer.Name, out ps)) {
-            if (CurrentPlayer.Score > ps.Score) {
-                ps.Score = CurrentPlayer.Score;
+        if (Players.TryGetValue(CurrentPlayerScore.Name, out ps)) {
+            if (CurrentPlayerScore.Score > ps.Score) {
+                ps.Score = CurrentPlayerScore.Score;
             }
         }
-        else Players.Add(CurrentPlayer.Name, CurrentPlayer);
+        else Players.Add(CurrentPlayerScore.Name, CurrentPlayerScore);
     }
 
     // Players info
@@ -141,7 +160,7 @@ public class GameState : MonoBehaviour {
                 node["score"].InnerText = "" + ps.Score;
             }
 
-            if (name.Equals(CurrentPlayer.Name)) {
+            if (name.Equals(CurrentPlayerScore.Name)) {
                 HasCurrentPlayer = true;
             }
         }
@@ -152,10 +171,10 @@ public class GameState : MonoBehaviour {
 
             XmlNode nodeName = document.CreateElement("name");
 
-            nodeName.InnerText = CurrentPlayer.Name;
+            nodeName.InnerText = CurrentPlayerScore.Name;
 
             XmlNode nodeScore = document.CreateElement("score");
-            nodeScore.InnerText = "" + CurrentPlayer.Score;
+            nodeScore.InnerText = "" + CurrentPlayerScore.Score;
 
             newNode.AppendChild(nodeName);
             newNode.AppendChild(nodeScore);

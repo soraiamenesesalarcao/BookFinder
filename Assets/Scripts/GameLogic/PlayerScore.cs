@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class PlayerScore : Object {
+public class PlayerScore {
 
     public string Name;
     public int Score;

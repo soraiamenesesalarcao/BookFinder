@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Coins : Inventory {
+public class Coins : Collectible {
 
-    void OnTriggerEnter(Collider c)
-    {
-        if (c.gameObject.tag.Equals("Coins"))
-        {
-            if (Definitions.Debug) Debug.Log("Coins");
-            coins++;
+    void OnTriggerEnter(Collider c) {
+        if (c.gameObject.tag.Equals("Player")) {
 
-            if (Definitions.Debug) Debug.Log(coins);
+            playerInfo = c.GetComponent(typeof(CharacterInfo)) as CharacterInfo;
+
+            if (gameObject.tag.Equals("Coins")) {
+                if (Definitions.Debug) Debug.Log("Coins");
+                playerInfo.Items.coins++;
+
+                if (Definitions.Debug) Debug.Log(playerInfo.Items.coins);
+            }
         }
-
         GameObject.Destroy(gameObject);
     }
 

@@ -46,8 +46,8 @@ public class StartScreen : MonoBehaviour {
                     if (playerName != "") {
                         if(Definitions.Debug) Debug.Log("Let The Game begin...");
                         GameState.Instance.SetCurrentPlayer(playerName);                       
-                        //GameState.Instance.ChangeLevel(Definitions.Levels.GAME); // will be this one
-                        GameState.Instance.ChangeLevel(Definitions.Levels.END);
+                        GameState.Instance.ChangeLevel(Definitions.Levels.GAME); // will be this one
+                        //GameState.Instance.ChangeLevel(Definitions.Levels.END);
                     }
                     else {
                         if (Definitions.Debug) Debug.Log("InsISTo que insira o seu nome!");
