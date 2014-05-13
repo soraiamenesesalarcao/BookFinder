@@ -12,8 +12,10 @@ public class GameState : MonoBehaviour {
     public Definitions.GameMode CurrentMode;
 
     public static SortedDictionary<string, PlayerScore> Players;
-    public CharacterInfo CurrentPlayer;
-    public static PlayerScore CurrentPlayerScore;
+    public static CharacterInfo CurrentPlayer; 
+    //public static PlayerScore CurrentPlayerScore;
+    public static string NewPlayer;
+    public static int LastScore;
     public static bool HasWon = true;
 
     public static float TimeGame { get; set; }
@@ -24,6 +26,13 @@ public class GameState : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
         TimeGame = 0;
+        if (GameObject.Find("Player") != null) 
+            CurrentPlayer = GameObject.Find("Player").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
+        if (CurrentPlayer != null) {
+            CurrentPlayer.Name = NewPlayer;
+            CurrentPlayer.Score = 0;
+            Debug.Log("Novo jogador: " + NewPlayer);
+        }
     }
 
     void Start() {
@@ -47,14 +56,17 @@ public class GameState : MonoBehaviour {
         if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Escape)) {
                 SwitchPause();
         }
-        // temp
+        // temporario
         if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.E)) {
+              //  LastScore = CurrentPlayer.Score;
                 EndGame();
         }
     }
 
     // Game End
     public void EndGame() {
+
+        LastScore = CurrentPlayer.Score;
         // apurar condicoes de vitoria       
 
         // melhores jogadores
@@ -99,21 +111,23 @@ public class GameState : MonoBehaviour {
 
     // Current Player
     public void SetCurrentPlayer(string playerName) {
-        CurrentPlayerScore = new PlayerScore(playerName, 0);
-
-        // cheating - MUAHAHAHAHAHAH
-        CurrentPlayerScore.Score += 4;
+        NewPlayer = playerName;
     }
 
     public void AddCurrentPlayerToBestScores() {
         PlayerScore ps;
 
-        if (Players.TryGetValue(CurrentPlayerScore.Name, out ps)) {
-            if (CurrentPlayerScore.Score > ps.Score) {
-                ps.Score = CurrentPlayerScore.Score;
+        //LastScore = CurrentPlayer.Score;
+
+        if (Players.TryGetValue(CurrentPlayer.Name, out ps)) {
+            if (CurrentPlayer.Score > ps.Score) {
+                ps.Score = CurrentPlayer.Score;
             }
         }
-        else Players.Add(CurrentPlayerScore.Name, CurrentPlayerScore);
+        else {
+            ps = new PlayerScore(CurrentPlayer.Name, CurrentPlayer.Score);
+            Players.Add(CurrentPlayer.Name, ps);
+        }
     }
 
     // Players info
@@ -160,7 +174,7 @@ public class GameState : MonoBehaviour {
                 node["score"].InnerText = "" + ps.Score;
             }
 
-            if (name.Equals(CurrentPlayerScore.Name)) {
+            if (name.Equals(CurrentPlayer.Name)) {
                 HasCurrentPlayer = true;
             }
         }
@@ -171,10 +185,10 @@ public class GameState : MonoBehaviour {
 
             XmlNode nodeName = document.CreateElement("name");
 
-            nodeName.InnerText = CurrentPlayerScore.Name;
+            nodeName.InnerText = CurrentPlayer.Name;
 
             XmlNode nodeScore = document.CreateElement("score");
-            nodeScore.InnerText = "" + CurrentPlayerScore.Score;
+            nodeScore.InnerText = "" + CurrentPlayer.Score;
 
             newNode.AppendChild(nodeName);
             newNode.AppendChild(nodeScore);

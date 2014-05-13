@@ -40,11 +40,12 @@ public class EndScreen : MonoBehaviour {
         GUILayout.Label("GAME OVER!", TitleStyle);
         GUILayout.Space(20);
 
-        message = (GameState.HasWon) ?  "You won!" : "You lost!";
+        message = (GameState.HasWon)    ? "Congratulations, " + GameState.NewPlayer + ": You won!" 
+                                        : "Sorry, " + GameState.NewPlayer + ": You lost!";
         GUILayout.Label(message, LabelStyle);
 
         GUILayout.Space(15);
-        GUILayout.Label("Score: " + GameState.CurrentPlayerScore.Score, LabelStyle);
+        GUILayout.Label("Score: " + GameState.LastScore, LabelStyle);
 
         GUILayout.Space(15);
         GUILayout.Label("Top " + Definitions.MAX_BEST_PLAYERS + " Scores:", LabelStyle);

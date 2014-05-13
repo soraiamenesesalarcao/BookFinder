@@ -13,7 +13,6 @@ public class HUD : MonoBehaviour {
     public Texture2D LifeTex;
 
     private Rect infoRect;
-    private Rect lifeRect;
 
     void Awake() {      
         
@@ -22,7 +21,6 @@ public class HUD : MonoBehaviour {
 
     void Start() {
         infoRect = new Rect(20, 20, 250, 200);
-        lifeRect = new Rect(40, 30, 20, 20);
        
         //CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
         if (GameObject.Find("Player") != null)
