@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CollisionRoom : MonoBehaviour {
 
+    private System.Random rndColor = new System.Random();
+    private System.Random rndIntensity = new System.Random();
+
     void Start() {
 
         string halls = "";
@@ -16,6 +19,7 @@ public class CollisionRoom : MonoBehaviour {
             halls = "Room" + i;
             turnOffTorchs(rooms);
         }
+        turnOnLight("AmbientLight");
     }
     
 
@@ -55,25 +59,51 @@ public class CollisionRoom : MonoBehaviour {
             if (go.name.Contains(obj) == true) go.light.enabled = false;
     }
 
+    void changeLightColor(string obj) {
+        GameObject go = GameObject.Find(obj);
+        Color color = Color.black;
+        int rndColorNum = rndColor.Next(7);
+        int rndIntensityNum = rndIntensity.Next(20);
+
+        switch (rndColorNum) {
+            case 0: color = Color.yellow; break;
+            case 1: color = Color.blue; break;
+            case 2: color = Color.cyan; break;
+            case 3: color = Color.gray; break;
+            case 4: color = Color.green; break;
+            case 5: color = Color.magenta; break;
+            case 6: color = Color.white; break;
+            default: color = Color.black; break;
+        }
+
+        go.light.color = color;
+        go.light.intensity = rndIntensityNum / 20.0f;
+        Debug.Log(go.light.intensity);
+    }
+
     void OnTriggerEnter(Collider col) {
         if (col.CompareTag("Player")) {
             if (this.name.Equals("Room1")) {
                 turnOnTorchs("Room1");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Room2")) {
                 turnOnTorchs("Room2");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Room3")) {
                 turnOnTorchs("Room3");
+                changeLightColor("AmbientLight");
             }
 
             if (this.name.Equals("Hall1")) {
                 turnOnTorchs("Hall1");
                 turnOnLight("LightSkeleton2");
-
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall2")) {
                 turnOnTorchs("Hall2");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall3")) {
                 turnOnTorchs("Hall3");
@@ -82,9 +112,11 @@ public class CollisionRoom : MonoBehaviour {
             if (this.name.Equals("Hall4")) {
                 turnOnTorchs("Hall4");
                 turnOnLight("LightSkeleton1");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall5")) {
                 turnOnTorchs("Hall5");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall6")) {
                 turnOnTorchs("Hall6");
@@ -92,16 +124,20 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall7")) {
                 turnOnTorchs("Hall7");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall8")) {
                 turnOnTorchs("Hall8");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall9")) {
                 turnOnTorchs("Hall9");
                 turnOnLight("LightSkeleton3");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall10")) {
                 turnOnTorchs("Hall10");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall11")) {
                 turnOnTorchs("Hall11");
@@ -109,12 +145,15 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall12")) {
                 turnOnTorchs("Hall12");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall13")) {
                 turnOnTorchs("Hall13");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall14")) {
                 turnOnTorchs("Hall14");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall15")) {
                 turnOnTorchs("Hall15");
@@ -122,37 +161,48 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall16")) {
                 turnOnTorchs("Hall16");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall17")) {
                 turnOnTorchs("Hall17");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall18")) {
                 turnOnTorchs("Hall18");
                 turnOnLight("LightSkeleton4");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall19")) {
                 turnOnTorchs("Hall19");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall20")) {
                 turnOnTorchs("Hall20");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall21")) {
                 turnOnTorchs("Hall21");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall22")) {
                 turnOnTorchs("Hall22");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall23")) {
                 turnOnTorchs("Hall23");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall24")) {
                 turnOnTorchs("Hall24");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall25")) {
                 turnOnTorchs("Hall25");
+                changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall26")) {
                 turnOnTorchs("Hall26");
+                changeLightColor("AmbientLight");
             }
         }
     }
