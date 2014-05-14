@@ -10,7 +10,6 @@ public static class Definitions {
     public enum Levels : int { START, GAME, END };
     public enum GameMode : int { PLAYING, PAUSE };
     public const float DURATION = 300;
-    public const float EVENT_DELTA = 5;
 
     // Values
 

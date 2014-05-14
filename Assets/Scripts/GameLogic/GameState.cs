@@ -10,6 +10,7 @@ public class GameState : MonoBehaviour {
 
     public static Definitions.Levels CurrentLevel;
     public Definitions.GameMode CurrentMode;
+    public bool VisibleInventory = false;
 
     public static SortedDictionary<string, PlayerScore> Players;
     public static CharacterInfo CurrentPlayer; 
@@ -60,6 +61,10 @@ public class GameState : MonoBehaviour {
 
         if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Escape)) {
             SwitchPause();
+        }
+
+        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.I)) {
+            VisibleInventory = (VisibleInventory) ? false : true;
         }
 
         // muito temporario
