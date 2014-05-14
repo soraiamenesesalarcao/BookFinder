@@ -29,7 +29,7 @@ public class PauseScreen : MonoBehaviour {
         menuColor = new Color(0.3f, 0.3f, 0.3f, 0.5f);
 
         backgroundRect = new Rect(0, 0, Screen.width, Screen.height);
-        menuRect = new Rect(Screen.width / 2 - 150, Screen.height / 3, 300, 200);
+        menuRect = new Rect(Screen.width / 2 - 150, Screen.height / 3, 300, 220);
         innerRect = new Rect(menuRect.x + 20, menuRect.y, menuRect.width - 40, menuRect.height - 50);
 
         backgroundTex = GUIUtils.MakeTexture((int)backgroundRect.width, (int)backgroundRect.height, backgroundColor);
@@ -65,6 +65,17 @@ public class PauseScreen : MonoBehaviour {
 
             if (GUILayout.Button("How to Play", GUILayout.Width(150))) {
                 if (Definitions.Debug) Debug.Log("Vamos lá aprender!");
+            }
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("New game", GUILayout.Width(150))) {
+                if (Definitions.Debug) Debug.Log("Here we go again...");
+                GameState.Instance.FreezeGame(false);
+                GameState.Instance.VisibleInventory = false;
+                GameState.Instance.ChangeLevel(Definitions.Levels.START);                
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();

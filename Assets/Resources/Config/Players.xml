@@ -1,11 +1,11 @@
 <players>
   <player>
     <name>Soraia</name>
-    <score>3</score>
+    <score>22</score>
   </player>
   <player>
     <name>Vania</name>
-    <score>3</score>
+    <score>4</score>
   </player>
   <player>
     <name>Catia</name>
@@ -13,6 +13,14 @@
   </player>
   <player>
     <name>Murta</name>
-    <score>3</score>
+    <score>4</score>
+  </player>
+  <player>
+    <name>Pardal</name>
+    <score>6</score>
+  </player>
+  <player>
+    <name>Benny</name>
+    <score>0</score>
   </player>
 </players>

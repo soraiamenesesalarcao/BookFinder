@@ -56,7 +56,7 @@ public class EndScreen : MonoBehaviour {
 
         GUILayout.Space(15);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Play again!")) {            
+        if (GUILayout.Button("New game")) {            
             if (Definitions.Debug) Debug.Log("Here we go again...");
             GameState.Instance.ChangeLevel(Definitions.Levels.START);
         }
