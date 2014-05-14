@@ -9,6 +9,7 @@ public class Coins : Collectible {
             if (gameObject.tag.Equals("Coins")) {
                 if (Definitions.Debug) Debug.Log("Coins");
                 GameState.CurrentPlayer.Items.coins++;
+                awardScore();
 
                 if (Definitions.Debug) Debug.Log(GameState.CurrentPlayer.Items.coins);
             }

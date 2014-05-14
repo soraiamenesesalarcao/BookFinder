@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Collectible : MonoBehaviour {
 
-    //protected CharacterInfo playerInfo;
+    public int Points = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -14,4 +14,8 @@ public class Collectible : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    protected void awardScore() {
+        GameState.CurrentPlayer.Score += (int)(Points * (GameState.Instance.TimeRemaining() / 60.0f));
+    }
 }
