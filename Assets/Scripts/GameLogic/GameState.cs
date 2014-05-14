@@ -70,12 +70,10 @@ public class GameState : MonoBehaviour {
     public void EndGame(bool timeup) {
         
         CheckVictory(timeup);
-     
+
         CurrentPlayer.TimePlayed = TimeGame;
 
-        if (Time.timeScale != 0)
-            savedTimeScale = Time.timeScale;
-        Time.timeScale = 0;
+        FreezeGame(false);
 
         Players = new SortedDictionary<string, PlayerScore>();
         ReadPlayersFromFile(Definitions.PLAYERS_FILE);
@@ -111,19 +109,15 @@ public class GameState : MonoBehaviour {
         Application.LoadLevel((int)level);
     }
 
-    // Pause Game
-    public void SwitchPause() {
-        
+    // Freeze game
+    public void FreezeGame(bool freeze) {
         GameObject map = GameObject.Find("MiniMap");
         GameObject player = GameObject.Find("Molly");
         CharacterMotor playerMotor;
         FPSInputController playerInput;
         MouseLook playerCameraX, playerCameraY;
 
-        if (CurrentMode == Definitions.GameMode.PLAYING) {
-            if(Definitions.Debug) Debug.Log("Pause on");
-                      
-            // freeze game
+        if (freeze) {
             if (map != null) map.camera.enabled = false;
             if (player != null) {
                 playerMotor = player.GetComponent(typeof(CharacterMotor)) as CharacterMotor;
@@ -134,22 +128,12 @@ public class GameState : MonoBehaviour {
                 playerCameraY.enabled = false;
                 playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;
                 playerCameraX.enabled = false;
-
             }
-
-            // freeze time
             if (Time.timeScale != 0)
                 savedTimeScale = Time.timeScale;
             Time.timeScale = 0;
-
-            // update mode
-            CurrentMode = Definitions.GameMode.PAUSE;
-            
         }
         else {
-            if (Definitions.Debug) Debug.Log("Pause off");
-
-            // unfreeze game
             if (map != null) map.camera.enabled = true;
             if (player != null) {
                 playerMotor = player.GetComponent(typeof(CharacterMotor)) as CharacterMotor;
@@ -161,13 +145,27 @@ public class GameState : MonoBehaviour {
                 playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;
                 playerCameraX.enabled = true;
             }
-
-            // unfreeze time
             if (savedTimeScale == 0)
                 Time.timeScale = savedTimeScale;
             else
                 Time.timeScale = 1;
+        }
+    }
 
+    // Pause Game
+    public void SwitchPause() {
+        
+        if (CurrentMode == Definitions.GameMode.PLAYING) {
+            if(Definitions.Debug) Debug.Log("Pause on");                      
+            // freeze game
+            FreezeGame(true);
+            // update mode
+            CurrentMode = Definitions.GameMode.PAUSE;            
+        }
+        else {
+            if (Definitions.Debug) Debug.Log("Pause off");
+            // unfreeze game
+            FreezeGame(false);
             // update mode
             CurrentMode = Definitions.GameMode.PLAYING;
         }
