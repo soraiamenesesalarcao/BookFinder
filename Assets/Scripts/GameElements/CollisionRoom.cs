@@ -84,7 +84,8 @@ public class CollisionRoom : MonoBehaviour {
 
     void fire(string obj) {
         GameObject go = GameObject.Find(obj);
-        GameObject bullet = Instantiate(go, go.transform.position, new Quaternion()) as GameObject;
+        GameObject bullet = Instantiate(go, go.transform.position, Quaternion.identity) as GameObject;
+        bullet.transform.localScale = new Vector3(1, 1, 1);
         CollisionBullet cb = bullet.GetComponent("CollisionBullet") as CollisionBullet;
         cb.shoot = true;
     }
@@ -317,30 +318,32 @@ public class CollisionRoom : MonoBehaviour {
     void OnTriggerStay(Collider col) {
         if (col.CompareTag("Player")) {
             if (this.name.Equals("Hall3")) {
-                if (timeElapsed == 0 || timeElapsed >= 500) {
+                if (timeElapsed == 0 || timeElapsed >= 75) {
                     fire("BulletTurret2");
                     timeElapsed = 0;
                 }
             }
             if (this.name.Equals("Hall6")) {
-                if (timeElapsed == 0 || timeElapsed >= 500) {
+                if (timeElapsed == 0 || timeElapsed >= 75) {
                     fire("BulletTurret1");
                     timeElapsed = 0;
                 }
             }
             if (this.name.Equals("Hall11")) {
-                if (timeElapsed == 0 || timeElapsed >= 500) {
+                if (timeElapsed == 0 || timeElapsed >= 75) {
                     fire("BulletTurret3");
                     timeElapsed = 0;
                 }
             }
             if (this.name.Equals("Hall15")) {
-                if (timeElapsed == 0 || timeElapsed >= 500) {
+                if (timeElapsed == 0 || timeElapsed >= 75) {
                     fire("BulletTurret4");
                     timeElapsed = 0;
                 }
             }
+
             timeElapsed++;
+            Debug.Log(timeElapsed);
         }
     }
 }
