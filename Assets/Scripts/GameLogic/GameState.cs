@@ -49,7 +49,9 @@ public class GameState : MonoBehaviour {
     void HandleInput() {        
         
         if (CurrentLevel == Definitions.Levels.GAME 
-            &&( Input.GetKeyUp(KeyCode.M) || TimeRemaining() <= 0)) { // ou o jogador saiu do labirinto
+            &&( Input.GetKeyUp(KeyCode.M) 
+            || TimeRemaining() <= 0
+            || CurrentPlayer.NumberOfLives <= 0)) { // ou o jogador saiu do labirinto
 
             if(TimeRemaining() <= 0)    
                 EndGame(true);
@@ -63,6 +65,9 @@ public class GameState : MonoBehaviour {
         // muito temporario
         if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Alpha1)) {
             CurrentPlayer.Score++; // incrementa de 2 em 2, wtf
+        }
+        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Alpha2)) {
+            CurrentPlayer.NumberOfLives--; // decrementa de 2 em 2, wtf
         }
     }
 

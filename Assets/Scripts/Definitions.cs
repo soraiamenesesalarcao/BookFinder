@@ -13,7 +13,6 @@ public static class Definitions {
     public const float EVENT_DELTA = 5;
 
     // Values
-    public enum Book : int { ORANGE, YELLOW, BORDEAUX, BLUE};
 
     public const int MIN_ORANGE = 1;
     public const int MIN_YELLOW = 1;
@@ -24,8 +23,9 @@ public static class Definitions {
     public const int SCORE_YELLOW = 10;
     public const int SCORE_BORDEAUX = 15;
     public const int SCORE_BLUE = 20;
-
     public const int SCORE_COIN = 10;
+    public const int COIN_AMOUNT = 10;
+
     public const int MAX_LIVES = 3;
     public const int MAX_LIFE = 99;
 

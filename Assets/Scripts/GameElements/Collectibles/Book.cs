@@ -10,7 +10,7 @@ public class Book : Collectible {
             if (gameObject.tag.Equals("BookOrange")) {
                 if (Definitions.Debug) Debug.Log("Book Orange");
                 GameState.CurrentPlayer.Items.book_orange++;
-                awardScore();
+                awardScore(Definitions.SCORE_ORANGE);
 
                 if (Definitions.Debug) Debug.Log(GameState.CurrentPlayer.Items.book_orange);
             }
@@ -18,7 +18,7 @@ public class Book : Collectible {
             if (gameObject.tag.Equals("BookYellow")) {
                 if (Definitions.Debug) Debug.Log("Book Yellow");
                 GameState.CurrentPlayer.Items.book_yellow++;
-                awardScore();
+                awardScore(Definitions.SCORE_YELLOW);
 
                 if (Definitions.Debug) Debug.Log(GameState.CurrentPlayer.Items.book_yellow);
             }
@@ -26,7 +26,7 @@ public class Book : Collectible {
             if (gameObject.tag.Equals("BookBordeaux")) {
                 if (Definitions.Debug) Debug.Log("Book Bordeaux");
                 GameState.CurrentPlayer.Items.book_bordeaux++;
-                awardScore();
+                awardScore(Definitions.SCORE_BORDEAUX);
 
                 if (Definitions.Debug) Debug.Log(GameState.CurrentPlayer.Items.book_bordeaux);
             }
@@ -34,7 +34,7 @@ public class Book : Collectible {
             if (gameObject.tag.Equals("BookBlue")) {
                 if (Definitions.Debug) Debug.Log("Book Blue");
                 GameState.CurrentPlayer.Items.book_blue++;
-                awardScore();
+                awardScore(Definitions.SCORE_BLUE);
 
                 if (Definitions.Debug) Debug.Log(GameState.CurrentPlayer.Items.book_blue);
             }
