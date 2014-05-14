@@ -342,8 +342,6 @@ public class CollisionRoom : MonoBehaviour {
                 }
             }
 
-            timeElapsed++;
-            Debug.Log(timeElapsed);
-        }
+            timeElapsed++;        }
     }
 }
