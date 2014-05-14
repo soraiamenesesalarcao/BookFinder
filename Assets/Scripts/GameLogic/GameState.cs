@@ -19,6 +19,7 @@ public class GameState : MonoBehaviour {
     public static bool HasWon = true;
 
     public static float TimeGame { get; set; }
+    private float savedTimeScale = -1;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
@@ -34,7 +35,7 @@ public class GameState : MonoBehaviour {
 	void Update () {
         if (CurrentLevel == Definitions.Levels.GAME) {
             if (CurrentMode == Definitions.GameMode.PLAYING) {
-                TimeGame = Time.time;
+                TimeGame = Time.timeSinceLevelLoad;
                 // outras coisas
             }
             HandleInput();
@@ -45,13 +46,18 @@ public class GameState : MonoBehaviour {
         
     }
 
-    void HandleInput() {
-        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Escape)) {
-                SwitchPause();
+    void HandleInput() {        
+        
+        if (CurrentLevel == Definitions.Levels.GAME 
+            &&( Input.GetKeyUp(KeyCode.M) || TimeRemaining() <= 0)) { // ou o jogador saiu do labirinto
+
+            if(TimeRemaining() <= 0)    
+                EndGame(true);
+            else EndGame(false);
         }
-        // temporario
-        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.E)) {
-                EndGame();
+
+        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Escape)) {
+            SwitchPause();
         }
 
         // muito temporario
@@ -61,19 +67,21 @@ public class GameState : MonoBehaviour {
     }
 
     // Game End
-    public void EndGame() {
+    public void EndGame(bool timeup) {
+        
+        CheckVictory(timeup);
+     
+        CurrentPlayer.TimePlayed = TimeGame;
 
-        // apurar condicoes de vitoria       
+        if (Time.timeScale != 0)
+            savedTimeScale = Time.timeScale;
+        Time.timeScale = 0;
 
-        // melhores jogadores
         Players = new SortedDictionary<string, PlayerScore>();
         ReadPlayersFromFile(Definitions.PLAYERS_FILE);
         AddCurrentPlayerToBestScores();
-        WritePlayersToFile(Definitions.PLAYERS_FILE);
+        WritePlayersToFile(Definitions.PLAYERS_FILE);    
 
-        // parar o timer
-
-        // mudar de cena
         ChangeLevel(Definitions.Levels.END);
     }
 
@@ -83,6 +91,18 @@ public class GameState : MonoBehaviour {
         if (time > 0) 
             return time;
         else return 0;
+    }
+
+    // Victory
+    void CheckVictory(bool timeup) {
+        if (!timeup
+            && CurrentPlayer.Items.book_blue >= Definitions.MIN_BLUE
+            && CurrentPlayer.Items.book_bordeaux >= Definitions.MIN_BORDEAUX
+            && CurrentPlayer.Items.book_orange >= Definitions.MIN_ORANGE
+            && CurrentPlayer.Items.book_yellow >= Definitions.MIN_YELLOW)
+
+            HasWon = true;
+        else HasWon = false;
     }
 
     // Level change
@@ -102,7 +122,7 @@ public class GameState : MonoBehaviour {
 
         if (CurrentMode == Definitions.GameMode.PLAYING) {
             if(Definitions.Debug) Debug.Log("Pause on");
-
+                      
             // freeze game
             if (map != null) map.camera.enabled = false;
             if (player != null) {
@@ -116,6 +136,12 @@ public class GameState : MonoBehaviour {
                 playerCameraX.enabled = false;
 
             }
+
+            // freeze time
+            if (Time.timeScale != 0)
+                savedTimeScale = Time.timeScale;
+            Time.timeScale = 0;
+
             // update mode
             CurrentMode = Definitions.GameMode.PAUSE;
             
@@ -135,6 +161,13 @@ public class GameState : MonoBehaviour {
                 playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;
                 playerCameraX.enabled = true;
             }
+
+            // unfreeze time
+            if (savedTimeScale == 0)
+                Time.timeScale = savedTimeScale;
+            else
+                Time.timeScale = 1;
+
             // update mode
             CurrentMode = Definitions.GameMode.PLAYING;
         }
@@ -143,6 +176,7 @@ public class GameState : MonoBehaviour {
     // Current Player
     public void SetCurrentPlayer(string playerName) {
         CurrentPlayer = new CharacterInfo(playerName);
+        TimeGame = 0;
     }
 
     public void AddCurrentPlayerToBestScores() {

@@ -52,9 +52,9 @@ public class HUD : MonoBehaviour {
 
             // Time remaining
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Time left: ", GUILayout.Width(75));
+            GUILayout.Label("Time Left: ", GUILayout.Width(75));
                 GUILayout.Space(10);
-                GUILayout.Label("" + GameState.TimeGame);
+                GUILayout.Label(GUIUtils.SecondsToHMS(GameState.Instance.TimeRemaining()));
             GUILayout.EndHorizontal();
 
         GUILayout.EndArea();

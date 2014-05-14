@@ -8,6 +8,7 @@ public class CharacterInfo {
     public int Life;
     public int Score;
     public Inventory Items;
+    public float TimePlayed;
 
     public CharacterInfo(string name) {
         Name = name;
@@ -15,6 +16,7 @@ public class CharacterInfo {
         Life = Definitions.MAX_LIFE;
         Score = 0;
         Items = new Inventory();
+        TimePlayed = 0;
     }	
 	
 }
