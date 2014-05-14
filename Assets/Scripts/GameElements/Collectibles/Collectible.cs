@@ -3,15 +3,7 @@ using System.Collections;
 
 public class Collectible : MonoBehaviour {
 
-    protected CharacterInfo playerInfo;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    protected void awardScore(int contribution) {
+        GameState.CurrentPlayer.Score += (int)(contribution * (GameState.Instance.TimeRemaining() / 60.0f));
+    }
 }
