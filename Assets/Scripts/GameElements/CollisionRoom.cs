@@ -6,6 +6,8 @@ public class CollisionRoom : MonoBehaviour {
     private System.Random rndColor = new System.Random();
     private System.Random rndIntensity = new System.Random();
 
+    int timeElapsed = 0;
+
     void Start() {
 
         string halls = "";
@@ -22,7 +24,6 @@ public class CollisionRoom : MonoBehaviour {
         turnOnLight("AmbientLight");
     }
     
-
     void turnOnTorchs(string room) {
         GameObject[] gos1 = GameObject.FindGameObjectsWithTag("Light");
         GameObject[] gos2 = GameObject.FindGameObjectsWithTag("Flame");
@@ -33,7 +34,7 @@ public class CollisionRoom : MonoBehaviour {
         foreach (GameObject go2 in gos2)
             if (go2.name.Contains(room) == true) go2.particleSystem.Play();
 
-        Debug.Log("Entrei" + room + "Acendi Cenas");
+        //Debug.Log("Entrei" + room + "Acendi Cenas");
     }
     void turnOffTorchs(string room) {
         GameObject[] gos1 = GameObject.FindGameObjectsWithTag("Light");
@@ -45,7 +46,7 @@ public class CollisionRoom : MonoBehaviour {
         foreach (GameObject go2 in gos2)
             if (go2.name.Contains(room) == true) go2.particleSystem.Stop();
 
-        Debug.Log("Sai" + room + "Apaguei Cenas");
+       // Debug.Log("Sai" + room + "Apaguei Cenas");
     }
 
     void turnOnLight(string obj) { 
@@ -59,6 +60,7 @@ public class CollisionRoom : MonoBehaviour {
             if (go.name.Contains(obj) == true) go.light.enabled = false;
     }
 
+    // passar isto para a luz ambiente
     void changeLightColor(string obj) {
         GameObject go = GameObject.Find(obj);
         Color color = Color.black;
@@ -78,7 +80,13 @@ public class CollisionRoom : MonoBehaviour {
 
         go.light.color = color;
         go.light.intensity = rndIntensityNum / 20.0f;
-        Debug.Log(go.light.intensity);
+    }
+
+    void fire(string obj) {
+        GameObject go = GameObject.Find(obj);
+        GameObject bullet = Instantiate(go, go.transform.position, new Quaternion()) as GameObject;
+        CollisionBullet cb = bullet.GetComponent("CollisionBullet") as CollisionBullet;
+        cb.shoot = true;
     }
 
     void OnTriggerEnter(Collider col) {
@@ -304,6 +312,35 @@ public class CollisionRoom : MonoBehaviour {
             if (this.name.Equals("Hall26")) {
                 turnOffTorchs("Hall26");
             }
+        }
+    }
+    void OnTriggerStay(Collider col) {
+        if (col.CompareTag("Player")) {
+            if (this.name.Equals("Hall3")) {
+                if (timeElapsed == 0 || timeElapsed >= 500) {
+                    fire("BulletTurret2");
+                    timeElapsed = 0;
+                }
+            }
+            if (this.name.Equals("Hall6")) {
+                if (timeElapsed == 0 || timeElapsed >= 500) {
+                    fire("BulletTurret1");
+                    timeElapsed = 0;
+                }
+            }
+            if (this.name.Equals("Hall11")) {
+                if (timeElapsed == 0 || timeElapsed >= 500) {
+                    fire("BulletTurret3");
+                    timeElapsed = 0;
+                }
+            }
+            if (this.name.Equals("Hall15")) {
+                if (timeElapsed == 0 || timeElapsed >= 500) {
+                    fire("BulletTurret4");
+                    timeElapsed = 0;
+                }
+            }
+            timeElapsed++;
         }
     }
 }
