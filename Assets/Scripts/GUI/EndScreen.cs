@@ -19,7 +19,7 @@ public class EndScreen : MonoBehaviour {
 	void Start () {
 
         backgroundRect = new Rect(0, 0, Screen.width, Screen.height);
-        menuRect = new Rect(Screen.width / 2 - 150, Screen.height / 4, 300, 220 + 10 * Definitions.MAX_BEST_PLAYERS);
+        menuRect = new Rect(Screen.width / 2 - 150, 100, 300, 300 + 10 * Mathf.Min(GameState.Players.Count, Definitions.MAX_BEST_PLAYERS));
         innerRect = new Rect(menuRect.x + 20, menuRect.y, menuRect.width - 40, menuRect.height - 50);
 	}
 	
@@ -56,7 +56,7 @@ public class EndScreen : MonoBehaviour {
 
         GUILayout.Space(15);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Play again!")) {            
+        if (GUILayout.Button("New game")) {            
             if (Definitions.Debug) Debug.Log("Here we go again...");
             GameState.Instance.ChangeLevel(Definitions.Levels.START);
         }
