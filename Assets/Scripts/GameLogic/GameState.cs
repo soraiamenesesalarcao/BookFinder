@@ -96,14 +96,49 @@ public class GameState : MonoBehaviour {
 
     // Pause Game
     public void SwitchPause() {
-        Debug.Log("entrei");
+        
+        GameObject map = GameObject.Find("MiniMap");
+        GameObject player = GameObject.Find("Molly");
+        CharacterMotor playerMotor;
+        FPSInputController playerInput;
+        MouseLook playerCameraX, playerCameraY;
+
         if (CurrentMode == Definitions.GameMode.PLAYING) {
-            Debug.Log("Ola");
+            if(Definitions.Debug) Debug.Log("Pause on");
+
+            // freeze game
+            if (map != null) map.camera.enabled = false;
+            if (player != null) {
+                playerMotor = player.GetComponent(typeof(CharacterMotor)) as CharacterMotor;
+                playerMotor.enabled = false;
+                playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
+                playerInput.enabled = false;
+                playerCameraY = player.transform.FindChild("Main Camera").GetComponent(typeof(MouseLook)) as MouseLook;
+                playerCameraY.enabled = false;
+                playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;
+                playerCameraX.enabled = false;
+
+            }
+            // update mode
             CurrentMode = Definitions.GameMode.PAUSE;
             
         }
         else {
-            Debug.Log("Adeus");
+            if (Definitions.Debug) Debug.Log("Pause off");
+
+            // unfreeze game
+            if (map != null) map.camera.enabled = true;
+            if (player != null) {
+                playerMotor = player.GetComponent(typeof(CharacterMotor)) as CharacterMotor;
+                playerMotor.enabled = true;
+                playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
+                playerInput.enabled = true;
+                playerCameraY = player.transform.FindChild("Main Camera").GetComponent(typeof(MouseLook)) as MouseLook;
+                playerCameraY.enabled = true;
+                playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;
+                playerCameraX.enabled = true;
+            }
+            // update mode
             CurrentMode = Definitions.GameMode.PLAYING;
         }
     }
