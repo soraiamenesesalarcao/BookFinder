@@ -85,6 +85,8 @@ public class GameState : MonoBehaviour {
 
         FreezeGame(false);
 
+        VisibleInventory = false;
+
         Players = new SortedDictionary<string, PlayerScore>();
         ReadPlayersFromFile(Definitions.PLAYERS_FILE);
         AddCurrentPlayerToBestScores();
