@@ -21,10 +21,6 @@ public class EndScreen : MonoBehaviour {
         backgroundRect = new Rect(0, 0, Screen.width, Screen.height);
         menuRect = new Rect(Screen.width / 2 - 150, Screen.height / 4, 300, 220 + 10 * Definitions.MAX_BEST_PLAYERS);
         innerRect = new Rect(menuRect.x + 20, menuRect.y, menuRect.width - 40, menuRect.height - 50);
-
-        // para bazar daqui
-        //GameState.Instance.AddCurrentPlayerToBestScores();
-        //GameState.Instance.WritePlayersToFile(Definitions.PLAYERS_FILE);
 	}
 	
 	void Update () {
@@ -40,18 +36,21 @@ public class EndScreen : MonoBehaviour {
         GUILayout.Label("GAME OVER!", TitleStyle);
         GUILayout.Space(20);
 
-        message = (GameState.HasWon)    ? "Congratulations, " + GameState.NewPlayer + ": You won!" 
-                                        : "Sorry, " + GameState.NewPlayer + ": You lost!";
+        message = (GameState.HasWon) ? "Congratulations, " + GameState.CurrentPlayer.Name + ": You won!"
+                                        : "Sorry, " + GameState.CurrentPlayer.Name + ": You lost!";
+        //message = (GameState.HasWon)    ? "Congratulations, " + GameState.Instance.CurrentPlayer.Name + ": You won!"
+        //                                : "Sorry, " + GameState.Instance.CurrentPlayer.Name + ": You lost!";
         GUILayout.Label(message, LabelStyle);
 
         GUILayout.Space(15);
-        GUILayout.Label("Score: " + GameState.LastScore, LabelStyle);
+        GUILayout.Label("Score: " + GameState.CurrentPlayer.Score, LabelStyle);
+        //GUILayout.Label("Score: " + GameState.Instance.CurrentPlayer.Score, LabelStyle);
 
         GUILayout.Space(15);
         GUILayout.Label("Top " + Definitions.MAX_BEST_PLAYERS + " Scores:", LabelStyle);
         
         GUILayout.Space(15);
-        GUILayout.Label("#. Player[Best Score]", LabelStyle);
+        GUILayout.Label("#. Player [Best Score]", LabelStyle);
         GUILayout.Space(10);
         PrintPlayers();
 
@@ -77,7 +76,7 @@ public class EndScreen : MonoBehaviour {
 
         // TO DO
         //  - Ordenar por pontuacao
-        //  - Apresentar apenas os top melhores
+        //  - Apresentar apenas os top melhores - ou scroll bar
         foreach (PlayerScore p in GameState.Players.Values) {
             i++;
             GUILayout.Label(i + ". " + p.ToString(), ListStyle);            

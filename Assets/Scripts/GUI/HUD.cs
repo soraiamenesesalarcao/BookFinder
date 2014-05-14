@@ -4,7 +4,6 @@ using System.Collections;
 public class HUD : MonoBehaviour {
 
     public static bool IsInventoryVisible = false;
-    public CharacterInfo CharacterInstance;
 
     public GUIStyle TexStyle;
     public GUIStyle LabelStyle;
@@ -16,31 +15,19 @@ public class HUD : MonoBehaviour {
 
     void Awake() {      
         
-
     }
 
     void Start() {
         infoRect = new Rect(20, 20, 250, 200);
-       
-        if (GameObject.Find("Molly") != null)
-            CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
     }
 
     void Update() {       
-
-        if (CharacterInstance != null && GameObject.Find("Molly") != null)
-            CharacterInstance = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
     }
 
-    void OnGUI() {        
-
-        if (CharacterInstance != null) {
+    void OnGUI() {
             DrawInfo();
-            DrawMap();
             if (IsInventoryVisible)
-                DrawInventory();
-        }
-        
+                DrawInventory(); 
     }
 
     void DrawInfo() {
@@ -48,7 +35,8 @@ public class HUD : MonoBehaviour {
 
             // Life
             GUILayout.BeginHorizontal(GUILayout.Width(100));
-                for (int i = 0; i < CharacterInstance.NumberOfLives; i++) {
+                for (int i = 0; i < GameState.CurrentPlayer.NumberOfLives; i++) {
+                //for (int i = 0; i < GameState.Instance.CurrentPlayer.NumberOfLives; i++) {
                     GUILayout.Box(LifeTex, TexStyle);
                     GUILayout.Space(5);
                 }
@@ -58,7 +46,8 @@ public class HUD : MonoBehaviour {
             GUILayout.BeginHorizontal();
             GUILayout.Label("Score: ", GUILayout.Width(75));
                 GUILayout.Space(10);
-                GUILayout.Label("" + CharacterInstance.Score);
+                GUILayout.Label("" + GameState.CurrentPlayer.Score);
+                //GUILayout.Label("" + GameState.Instance.CurrentPlayer.Score);
             GUILayout.EndHorizontal();
 
             // Time remaining
@@ -74,6 +63,4 @@ public class HUD : MonoBehaviour {
     void DrawInventory() {
     }
 
-    void DrawMap() {
-    }
 }

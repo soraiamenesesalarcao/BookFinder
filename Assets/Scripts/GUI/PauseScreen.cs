@@ -21,11 +21,10 @@ public class PauseScreen : MonoBehaviour {
     void OnGUI() {
         if (mode == Definitions.GameMode.PAUSE) {
 
-            Debug.Log("pausa");
-            // experiencia
+            // temporario
             Rect R = new Rect(0, 0, Screen.width, Screen.height);
-            GUI.Box(R, "" + GameState.HasWon);
-            // end of experiencia 
+            GUI.Box(R, "Pausa: " + GameState.HasWon);
+            
         }
     }
 

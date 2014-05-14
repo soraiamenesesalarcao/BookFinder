@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Collectible : MonoBehaviour {
 
-    protected CharacterInfo playerInfo;
+    //protected CharacterInfo playerInfo;
 
 	// Use this for initialization
 	void Start () {

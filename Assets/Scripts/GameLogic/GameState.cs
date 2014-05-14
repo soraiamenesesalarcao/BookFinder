@@ -13,25 +13,17 @@ public class GameState : MonoBehaviour {
 
     public static SortedDictionary<string, PlayerScore> Players;
     public static CharacterInfo CurrentPlayer; 
-    public static string NewPlayer;
-    public static int LastScore;
+//    public CharacterInfo CurrentPlayer; 
+
+
     public static bool HasWon = true;
 
     public static float TimeGame { get; set; }
-
-    private static float eventTime;
 
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
         TimeGame = 0;
-        if (GameObject.Find("Molly") != null) 
-            CurrentPlayer = GameObject.Find("Molly").GetComponent(typeof(CharacterInfo)) as CharacterInfo;
-        if (CurrentPlayer != null) {
-            CurrentPlayer.Name = NewPlayer;
-            CurrentPlayer.Score = 0;
-            if(Definitions.Debug) Debug.Log("Novo jogador: " + NewPlayer);
-        }
     }
 
     void Start() {
@@ -40,11 +32,13 @@ public class GameState : MonoBehaviour {
     	
 	// Update is called once per frame
 	void Update () {
-        if (CurrentMode == Definitions.GameMode.PLAYING) {
-            TimeGame = Time.time;
-            // outras coisas
+        if (CurrentLevel == Definitions.Levels.GAME) {
+            if (CurrentMode == Definitions.GameMode.PLAYING) {
+                TimeGame = Time.time;
+                // outras coisas
+            }
+            HandleInput();
         }
-        HandleInput();
 	}
 
     void OnGUI() {
@@ -57,15 +51,18 @@ public class GameState : MonoBehaviour {
         }
         // temporario
         if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.E)) {
-              //  LastScore = CurrentPlayer.Score;
                 EndGame();
+        }
+
+        // muito temporario
+        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Alpha1)) {
+            CurrentPlayer.Score++; // incrementa de 2 em 2, wtf
         }
     }
 
     // Game End
     public void EndGame() {
 
-        LastScore = CurrentPlayer.Score;
         // apurar condicoes de vitoria       
 
         // melhores jogadores
@@ -145,13 +142,11 @@ public class GameState : MonoBehaviour {
 
     // Current Player
     public void SetCurrentPlayer(string playerName) {
-        NewPlayer = playerName;
+        CurrentPlayer = new CharacterInfo(playerName);
     }
 
     public void AddCurrentPlayerToBestScores() {
         PlayerScore ps;
-
-        //LastScore = CurrentPlayer.Score;
 
         if (Players.TryGetValue(CurrentPlayer.Name, out ps)) {
             if (CurrentPlayer.Score > ps.Score) {
