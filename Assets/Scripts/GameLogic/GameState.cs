@@ -1,4 +1,9 @@
 ﻿using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -213,9 +218,11 @@ public class GameState : MonoBehaviour {
         VisibleInventory = false;
 
         Players = new SortedDictionary<string, PlayerScore>();
-        ReadPlayersFromFile(Definitions.PLAYERS_FILE);
+        //ReadPlayersFromFile(Definitions.PLAYERS_FILE);
+        ReadPlayersFromFile(Definitions.PLAYERS_FILE_SA);
         AddCurrentPlayerToBestScores();
-        WritePlayersToFile(Definitions.PLAYERS_FILE);
+        //WritePlayersToFile(Definitions.PLAYERS_FILE);
+        WritePlayersToFile(Definitions.PLAYERS_FILE_SA);
 
         SortTopPlayers();
 
@@ -339,8 +346,10 @@ public class GameState : MonoBehaviour {
         int score;
         PlayerScore ps;
 
+        TextAsset XMLFile = (TextAsset)Resources.Load(filename);
+
         XmlDocument document = new XmlDocument();
-        document.Load(filename);
+        document.LoadXml(XMLFile.text);
         XmlElement docElement = document.DocumentElement;
         XmlNodeList xmlNodes = docElement.SelectNodes("/players/player");
         
@@ -364,8 +373,9 @@ public class GameState : MonoBehaviour {
         PlayerScore ps;
         bool HasCurrentPlayer = false;
 
+        TextAsset xmlData = Resources.Load(filename) as TextAsset;
         XmlDocument document = new XmlDocument();
-        document.Load(filename);
+        document.LoadXml(xmlData.text);
         XmlElement docElement = document.DocumentElement;
         XmlNodeList xmlNodes = docElement.SelectNodes("/players/player");
 
@@ -398,7 +408,11 @@ public class GameState : MonoBehaviour {
 
             document["players"].AppendChild(newNode);
         }
-        document.Save(Definitions.PLAYERS_FILE);
+        //document.Save(Definitions.PLAYERS_FILE);
+       //document.Save(Definitions.PLAYERS_FILE_SA);
+        #if UNITY_EDITOR
+       document.Save(AssetDatabase.GetAssetPath(xmlData));
+    #endif
     }
 
 }

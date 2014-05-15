@@ -41,7 +41,8 @@ public static class Definitions {
     public const int MAX_BEST_PLAYERS = 10;
 
     // External Files
-    public const string PLAYERS_FILE = "Assets/Resources/Config/Players.xml";
+    //public const string PLAYERS_FILE = "Assets/Resources/Config/Players.xml";
+    public const string PLAYERS_FILE_SA = "Config/Players";
 
 
 }
