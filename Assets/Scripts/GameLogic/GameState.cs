@@ -15,7 +15,6 @@ public class GameState : MonoBehaviour {
 
     public static SortedDictionary<string, PlayerScore> Players;
     public static SortedList<string, PlayerScore> TopPlayers;
-    //TopPlayersComparer tpComparer;
     public static CharacterInfo CurrentPlayer; 
 
 
@@ -190,7 +189,12 @@ public class GameState : MonoBehaviour {
             usedPositions.Add(positions[rp]);
             books_yellow[i] = Instantiate(GameObject.Find("Book_Yellow"), positions[rp], new Quaternion()) as GameObject;
         }
-
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Light");
+        foreach (GameObject go in gos) {
+            if (go.name.Contains("Book")) {
+                go.light.enabled = true;
+            }
+        }
        
     }
 

@@ -41,7 +41,7 @@ public class CollisionRoom : MonoBehaviour {
         GameObject[] gos2 = GameObject.FindGameObjectsWithTag("Flame");
 
         foreach (GameObject go in gos1)
-            if (go.name.Contains(room) == true) go.light.enabled = false;
+            if (go.name.Contains(room) == true && !go.name.Contains("Book")) go.light.enabled = false;
 
         foreach (GameObject go2 in gos2)
             if (go2.name.Contains(room) == true) go2.particleSystem.Stop();
@@ -57,7 +57,7 @@ public class CollisionRoom : MonoBehaviour {
     void turnOffLight(string obj) {
         GameObject[] gos1 = GameObject.FindGameObjectsWithTag("Light");
         foreach (GameObject go in gos1)
-            if (go.name.Contains(obj) == true) go.light.enabled = false;
+            if (go.name.Contains(obj) == true && !go.name.Contains("Book")) go.light.enabled = false;
     }
 
     // passar isto para a luz ambiente
