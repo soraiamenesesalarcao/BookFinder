@@ -102,57 +102,56 @@ public class HUD : MonoBehaviour {
         if (IsInventoryVisible) {
             GUI.DrawTexture(inventoryBackRect, inventoryBackgroundTex);
             GUILayout.BeginArea(inventoryRect);
-            // Coins
-            GUILayout.BeginHorizontal();
-           // GUILayout.FlexibleSpace();
-            GUILayout.Label("Coins: ", LabelStyle, GUILayout.Width(75));            
-            GUILayout.Space(20);
-            GUILayout.Label("" + GameState.CurrentPlayer.Items.coins, ItemCountStyle);
-            GUILayout.EndHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Space(10);
 
             // Books
             GUILayout.BeginHorizontal();
-           // GUILayout.FlexibleSpace();
-            //GUILayout.Label("Blue books: ", GUILayout.Width(75)); 
-            GUILayout.Label(BlueTex);
+            GUILayout.Label(BlueTex, GUILayout.Width(70));
             GUILayout.Space(20);
+            GUILayout.BeginVertical();
+            GUILayout.FlexibleSpace();
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_blue, ItemCountStyle);
             GUILayout.FlexibleSpace();
+            GUILayout.EndVertical();
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-          //  GUILayout.FlexibleSpace();
-            //GUILayout.Label("Bordeaux books: ", GUILayout.Width(75)); 
-            GUILayout.Label(BordeauxTex);
-            GUILayout.Space(10);
+            GUILayout.Label(BordeauxTex, GUILayout.Width(70));
+            GUILayout.Space(20);
+            GUILayout.BeginVertical();
+            GUILayout.FlexibleSpace();
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_bordeaux, ItemCountStyle);
             GUILayout.FlexibleSpace();
+            GUILayout.EndVertical();
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.Space(20);
 
             GUILayout.BeginHorizontal();
-          //  GUILayout.FlexibleSpace();
-            //GUILayout.Label("Orange books: ", GUILayout.Width(75));
-            GUILayout.Label(OrangeTex);
+            GUILayout.Label(OrangeTex, GUILayout.Width(70));
             GUILayout.Space(20);
+            GUILayout.BeginVertical();
+            GUILayout.FlexibleSpace();
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_orange, ItemCountStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndVertical();
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-          //  GUILayout.FlexibleSpace();
-            //GUILayout.Label("Yellow books: ", GUILayout.Width(75)); 
-            GUILayout.Label(YellowTex);
+            GUILayout.Label(YellowTex, GUILayout.Width(70));
             GUILayout.Space(20);
+            GUILayout.BeginVertical();
+            GUILayout.FlexibleSpace();
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_yellow, ItemCountStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndVertical();
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
-            GUILayout.Space(5);
+            GUILayout.Space(10);
             GUILayout.Label("I : Hide Inventory");
             GUILayout.Space(5);
 
