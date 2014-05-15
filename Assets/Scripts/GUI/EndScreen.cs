@@ -38,13 +38,10 @@ public class EndScreen : MonoBehaviour {
 
         message = (GameState.HasWon) ? "Congratulations, " + GameState.CurrentPlayer.Name + ": You won!"
                                         : "Sorry, " + GameState.CurrentPlayer.Name + ": You lost!";
-        //message = (GameState.HasWon)    ? "Congratulations, " + GameState.Instance.CurrentPlayer.Name + ": You won!"
-        //                                : "Sorry, " + GameState.Instance.CurrentPlayer.Name + ": You lost!";
         GUILayout.Label(message, LabelStyle);
 
         GUILayout.Space(15);
         GUILayout.Label("Score: " + GameState.CurrentPlayer.Score, LabelStyle);
-        //GUILayout.Label("Score: " + GameState.Instance.CurrentPlayer.Score, LabelStyle);
 
         GUILayout.Space(15);
         GUILayout.Label("Top " + Definitions.MAX_BEST_PLAYERS + " Scores:", LabelStyle);
@@ -74,11 +71,7 @@ public class EndScreen : MonoBehaviour {
     public void PrintPlayers() {
         int i = 0;
 
-        // TO DO
-        //  - Ordenar por pontuacao
-
-        foreach (PlayerScore p in GameState.Players.Values) {    
-        //foreach (PlayerScore p in GameState.TopPlayers.Values) {            
+        foreach (PlayerScore p in GameState.Players.Values) {            
             i++;
             if (i <= Definitions.MAX_BEST_PLAYERS) {
                 GUILayout.Label(i + ". " + p.ToString(), ListStyle);
