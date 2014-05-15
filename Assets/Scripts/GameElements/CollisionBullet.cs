@@ -43,7 +43,7 @@ public class CollisionBullet : MonoBehaviour {
                 GameState.CurrentPlayer.Life -= Definitions.DAMAGE_ENEMY_BULLET;
                 int life = GameState.CurrentPlayer.Life;
 
-                if (life == 0) GameState.CurrentPlayer.NumberOfLives = 0;
+                if (life <= 0) GameState.CurrentPlayer.NumberOfLives = 0;
                 else if (life > 0 && life <= 34) GameState.CurrentPlayer.NumberOfLives = 1;
                 else if (life > 34 && life < 67) GameState.CurrentPlayer.NumberOfLives = 2;
                 else if (life >= 67) GameState.CurrentPlayer.NumberOfLives = 3;
