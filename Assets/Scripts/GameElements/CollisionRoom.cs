@@ -159,6 +159,7 @@ public class CollisionRoom : MonoBehaviour {
             if (this.name.Equals("Hall13")) {
                 turnOnTorchs("Hall13");
                 changeLightColor("AmbientLight");
+                //GameState.Instance.EndGame(false);
             }
             if (this.name.Equals("Hall14")) {
                 turnOnTorchs("Hall14");
@@ -271,6 +272,7 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall13")) {
                 turnOffTorchs("Hall13");
+                GameState.Instance.EndGame(false);
             }
             if (this.name.Equals("Hall14")) {
                 turnOffTorchs("Hall14");

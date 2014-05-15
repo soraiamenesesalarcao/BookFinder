@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7efa1042447a7409519fbf3ca441ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentMode: 0
+  VisibleInventory: 0
 --- !u!4 &1334705592
 Transform:
   m_ObjectHideFlags: 0
@@ -396,7 +398,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  Background: {fileID: 2800000, guid: 161b33a6e21958140b0d471d8e6f6353, type: 3}
+  Background: {fileID: 2800000, guid: 8c66553f4daa5dc41873d1df0411749a, type: 3}
 --- !u!4 &1442224675
 Transform:
   m_ObjectHideFlags: 0

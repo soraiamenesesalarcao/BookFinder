@@ -219,7 +219,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  Background: {fileID: 2800000, guid: 161b33a6e21958140b0d471d8e6f6353, type: 3}
+  Background: {fileID: 2800000, guid: d06de5621bb966140bbecfa760808d9d, type: 3}
 --- !u!4 &120224772
 Transform:
   m_ObjectHideFlags: 0
