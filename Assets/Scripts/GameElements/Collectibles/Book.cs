@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Book : Collectible {
 
+
     void OnTriggerEnter(Collider c) {
 
         if (c.gameObject.tag.Equals("Player")) {
