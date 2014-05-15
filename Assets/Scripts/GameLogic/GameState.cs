@@ -15,9 +15,8 @@ public class GameState : MonoBehaviour {
 
     public static SortedDictionary<string, PlayerScore> Players;
     public static SortedList<string, PlayerScore> TopPlayers;
-    TopPlayersComparer tpComparer;
+    //TopPlayersComparer tpComparer;
     public static CharacterInfo CurrentPlayer; 
-//    public CharacterInfo CurrentPlayer; 
 
 
     public static bool HasWon = true;
@@ -41,7 +40,6 @@ public class GameState : MonoBehaviour {
             InitPositions();
             DestroyBooks();
             GenerateBooks();
-            //generateCoins();
         }
 
     }
@@ -68,9 +66,8 @@ public class GameState : MonoBehaviour {
     void HandleInput() {        
         
         if (CurrentLevel == Definitions.Levels.GAME 
-            &&( Input.GetKeyUp(KeyCode.M) 
-            || TimeRemaining() <= 0
-            || CurrentPlayer.NumberOfLives <= 0)) { // ou o jogador saiu do labirinto
+            &&( TimeRemaining() <= 0
+                || CurrentPlayer.Life <= 0)) {
 
             if(TimeRemaining() <= 0)    
                 EndGame(true);
@@ -85,13 +82,6 @@ public class GameState : MonoBehaviour {
             VisibleInventory = (VisibleInventory) ? false : true;
         }
 
-        // muito temporario
-        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Alpha1)) {
-            CurrentPlayer.Score++; // incrementa de 2 em 2, wtf
-        }
-        if (CurrentLevel == Definitions.Levels.GAME && Input.GetKeyUp(KeyCode.Alpha2)) {
-            CurrentPlayer.NumberOfLives--; // decrementa de 2 em 2, wtf
-        }
     }
 
     // Collectibles init
