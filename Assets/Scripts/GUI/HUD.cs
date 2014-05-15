@@ -11,6 +11,10 @@ public class HUD : MonoBehaviour {
     public GUIStyle ItemCountStyle;
 
     public Texture2D LifeTex;
+    public Texture2D OrangeTex;
+    public Texture2D YellowTex;
+    public Texture2D BlueTex;
+    public Texture2D BordeauxTex;
     private Texture2D infoBackgroundTex;
     private Texture2D inventoryBackgroundTex;
     private Texture2D inventoryHiddenBackgroundTex;
@@ -38,7 +42,7 @@ public class HUD : MonoBehaviour {
         infoRect = new Rect(infoBackRect.x + rectOffset, infoBackRect.y + rectOffset, 
                             infoBackRect.width - 2 * rectOffset, infoBackRect.height - 2 * rectOffset);
 
-        inventoryBackRect = new Rect(rectOffset, Screen.height - 220 - rectOffset, 175, 220);
+        inventoryBackRect = new Rect(rectOffset, Screen.height - 400 - rectOffset, 175, 400);
         inventoryRect = new Rect(inventoryBackRect.x + rectOffset, inventoryBackRect.y + rectOffset,
                                        inventoryBackRect.width - rectOffset, inventoryBackRect.height - rectOffset); 
                
@@ -48,8 +52,7 @@ public class HUD : MonoBehaviour {
               
         infoBackgroundTex = GUIUtils.MakeTexture((int)infoBackRect.width, (int)infoBackRect.height, backgroundColor);
         inventoryBackgroundTex = GUIUtils.MakeTexture((int)inventoryBackRect.width, (int)inventoryBackRect.height, backgroundColor);
-        inventoryHiddenBackgroundTex = GUIUtils.MakeTexture((int)inventoryHiddenBackRect.width, (int)inventoryHiddenBackRect.height, backgroundColor);
-        
+        inventoryHiddenBackgroundTex = GUIUtils.MakeTexture((int)inventoryHiddenBackRect.width, (int)inventoryHiddenBackRect.height, backgroundColor);        
     }
 
     void Update() {
@@ -68,8 +71,7 @@ public class HUD : MonoBehaviour {
             // Life
             GUILayout.BeginHorizontal(GUILayout.Width(100));
                 for (int i = 0; i < GameState.CurrentPlayer.NumberOfLives; i++) {
-                //for (int i = 0; i < GameState.Instance.CurrentPlayer.NumberOfLives; i++) {
-                    GUILayout.Box(LifeTex, TexStyle);
+                    GUILayout.Label(LifeTex);
                     GUILayout.Space(5);
                 }
             GUILayout.EndHorizontal();
@@ -78,19 +80,18 @@ public class HUD : MonoBehaviour {
 
             // Score
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Score: ", GUILayout.Width(75));
+            GUILayout.Label("Score: ", LabelStyle, GUILayout.Width(75));
                 GUILayout.Space(10);
-                GUILayout.Label("" + GameState.CurrentPlayer.Score);
-                //GUILayout.Label("" + GameState.Instance.CurrentPlayer.Score);
+                GUILayout.Label("" + GameState.CurrentPlayer.Score, ValueStyle);
             GUILayout.EndHorizontal();
 
             GUILayout.FlexibleSpace();
 
             // Time remaining
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Time Left: ", GUILayout.Width(75));
+            GUILayout.Label("Time Left: ", LabelStyle, GUILayout.Width(75));
                 GUILayout.Space(10);
-                GUILayout.Label(GUIUtils.SecondsToHMS(GameState.Instance.TimeRemaining()));
+                GUILayout.Label(GUIUtils.SecondsToHMS(GameState.Instance.TimeRemaining()), ValueStyle);
             GUILayout.EndHorizontal();
 
         GUILayout.EndArea();
@@ -103,38 +104,56 @@ public class HUD : MonoBehaviour {
             GUILayout.BeginArea(inventoryRect);
             // Coins
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Coins: ", GUILayout.Width(75)); // to be replaced by a pretty picture
-            GUILayout.Space(10);
+           // GUILayout.FlexibleSpace();
+            GUILayout.Label("Coins: ", LabelStyle, GUILayout.Width(75));            
+            GUILayout.Space(20);
             GUILayout.Label("" + GameState.CurrentPlayer.Items.coins, ItemCountStyle);
             GUILayout.EndHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Space(10);
 
             // Books
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Blue books: ", GUILayout.Width(75)); // to be replaced by a pretty picture
-            GUILayout.Space(10);
+           // GUILayout.FlexibleSpace();
+            //GUILayout.Label("Blue books: ", GUILayout.Width(75)); 
+            GUILayout.Label(BlueTex);
+            GUILayout.Space(20);
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_blue, ItemCountStyle);
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+            GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Bordeaux books: ", GUILayout.Width(75)); // to be replaced by a pretty picture
+          //  GUILayout.FlexibleSpace();
+            //GUILayout.Label("Bordeaux books: ", GUILayout.Width(75)); 
+            GUILayout.Label(BordeauxTex);
             GUILayout.Space(10);
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_bordeaux, ItemCountStyle);
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+            GUILayout.Space(20);
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Orange books: ", GUILayout.Width(75)); // to be replaced by a pretty picture
-            GUILayout.Space(10);
+          //  GUILayout.FlexibleSpace();
+            //GUILayout.Label("Orange books: ", GUILayout.Width(75));
+            GUILayout.Label(OrangeTex);
+            GUILayout.Space(20);
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_orange, ItemCountStyle);
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+            GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Yellow books: ", GUILayout.Width(75)); // to be replaced by a pretty picture
-            GUILayout.Space(10);
+          //  GUILayout.FlexibleSpace();
+            //GUILayout.Label("Yellow books: ", GUILayout.Width(75)); 
+            GUILayout.Label(YellowTex);
+            GUILayout.Space(20);
             GUILayout.Label("" + GameState.CurrentPlayer.Items.book_yellow, ItemCountStyle);
+            GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
             GUILayout.Space(5);
-            GUILayout.Label("'I' : Hide Inventory");
+            GUILayout.Label("I : Hide Inventory");
             GUILayout.Space(5);
 
             GUILayout.EndArea();
