@@ -5,7 +5,9 @@ public class Book : Collectible {
 
     void OnTriggerEnter(Collider c) {
 
-        if (c.gameObject.tag.Equals("Molly")) {
+        if (c.gameObject.tag.Equals("Player")) {
+
+            Debug.Log("Detectou o player");
 
             if (gameObject.tag.Equals("BookOrange")) {
                 if (Definitions.Debug) Debug.Log("Book Orange");

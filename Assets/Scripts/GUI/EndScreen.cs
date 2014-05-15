@@ -76,10 +76,14 @@ public class EndScreen : MonoBehaviour {
 
         // TO DO
         //  - Ordenar por pontuacao
-        //  - Apresentar apenas os top melhores - ou scroll bar
-        foreach (PlayerScore p in GameState.Players.Values) {
+
+        foreach (PlayerScore p in GameState.Players.Values) {    
+        //foreach (PlayerScore p in GameState.TopPlayers.Values) {            
             i++;
-            GUILayout.Label(i + ". " + p.ToString(), ListStyle);            
+            if (i <= Definitions.MAX_BEST_PLAYERS) {
+                GUILayout.Label(i + ". " + p.ToString(), ListStyle);
+            }
+            else break;
         }
     }
 

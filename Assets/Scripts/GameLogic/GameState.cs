@@ -170,35 +170,34 @@ public class GameState : MonoBehaviour {
         int rp;
 
         for (int i = 0; i < Definitions.MAX_BLUE; i++) {
-           // do {
+            do {
                 rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);                
-           // } while(usedPositions.Contains(positions[rp]));
-           // usedPositions.Add(positions[rp]);
-          //  books_blue[i] = Instantiate(GameObject.Find("Book_Blue"), new Vector3(120, -165, 120), new Quaternion()) as GameObject;
-            books_blue[i] = Instantiate(GameObject.Find("Book_Blue"), positions[0], new Quaternion()) as GameObject;
+            } while(usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
+            books_blue[i] = Instantiate(GameObject.Find("Book_Blue"), positions[rp], new Quaternion()) as GameObject;
         }
 
         for (int i = 0; i < Definitions.MAX_BORDEAUX; i++) {
-         //   do {
+            do {
                 rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
-         //   } while (usedPositions.Contains(positions[rp]));
-//            usedPositions.Add(positions[rp]);
+            } while (usedPositions.Contains(positions[rp]));
+                        usedPositions.Add(positions[rp]);
             books_bordeaux[i] = Instantiate(GameObject.Find("Book_Bordeaux"), positions[rp], new Quaternion()) as GameObject;
         }
 
         for (int i = 0; i < Definitions.MAX_ORANGE; i++) {
-        //    do {
+            do {
                 rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
-        //    } while (usedPositions.Contains(positions[rp]));
-            //usedPositions.Add(positions[rp]);
+            } while (usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
             books_orange[i] = Instantiate(GameObject.Find("Book_Orange"), positions[rp], new Quaternion()) as GameObject;
         }
 
         for (int i = 0; i < Definitions.MAX_YELLOW; i++) {
-         //   do {
+            do {
                 rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
-         //   } while (usedPositions.Contains(positions[rp]));
-            //usedPositions.Add(positions[rp]);
+            } while (usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
             books_yellow[i] = Instantiate(GameObject.Find("Book_Yellow"), positions[rp], new Quaternion()) as GameObject;
         }
 
