@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -13,6 +14,8 @@ public class GameState : MonoBehaviour {
     public bool VisibleInventory = false;
 
     public static SortedDictionary<string, PlayerScore> Players;
+    public static SortedList<string, PlayerScore> TopPlayers;
+    TopPlayersComparer tpComparer;
     public static CharacterInfo CurrentPlayer; 
 //    public CharacterInfo CurrentPlayer; 
 
@@ -22,14 +25,29 @@ public class GameState : MonoBehaviour {
     public static float TimeGame { get; set; }
     private float savedTimeScale = -1;
 
+    private System.Random rndPositions = new System.Random();
+    private Vector3[] positions;
+    private ArrayList usedPositions;
+
+
+
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
         TimeGame = 0;
+        //Debug.Log("Fui chamado e estou em " + CurrentLevel);
+        if (CurrentLevel == Definitions.Levels.GAME) {
+            usedPositions = new ArrayList();
+            InitPositions();
+            DestroyBooks();
+            GenerateBooks();
+            //generateCoins();
+        }
+
     }
 
     void Start() {
-        CurrentMode = Definitions.GameMode.PLAYING;
+        CurrentMode = Definitions.GameMode.PLAYING;        
     }
     	
 	// Update is called once per frame
@@ -76,6 +94,120 @@ public class GameState : MonoBehaviour {
         }
     }
 
+    // Collectibles init
+
+    public void InitPositions() {
+
+        positions = new Vector3[Definitions.COLLECTIBLE_POSITIONS];        
+
+        positions[0] = new Vector3(120, -165, 120);
+        positions[1] = new Vector3(10, -165, 85);
+        positions[2] = new Vector3(0, -165, -75);
+        positions[3] = new Vector3(115, -165, 10);
+        positions[4] = new Vector3(80, -165, -75);
+        positions[5] = new Vector3(80, -165, -115);
+        positions[6] = new Vector3(-20, -165, 15);
+        positions[7] = new Vector3(30, -165, 0);
+        positions[8] = new Vector3(20, -165, -25);
+        positions[9] = new Vector3(40, -165, 120);
+
+        positions[10] = new Vector3(0, -165, 20);
+        positions[11] = new Vector3(60, -165, 80);
+        positions[12] = new Vector3(60, -165, 105);
+        positions[13] = new Vector3(0, -165, 140);
+        positions[14] = new Vector3(-40, -165, 70);
+        positions[15] = new Vector3(-70, -165, 105);
+        positions[16] = new Vector3(-110, -165, 140);
+        positions[17] = new Vector3(-120, -165, 80);
+        positions[18] = new Vector3(-100, -165, 90);
+        positions[19] = new Vector3(-60, -165, -120);
+
+        positions[20] = new Vector3(-140, -165, -75);
+        positions[21] = new Vector3(-55, -165, -75);
+        positions[22] = new Vector3(-95, -165, -35);
+        positions[23] = new Vector3(-140, -165, 0);
+        positions[24] = new Vector3(-120, -165, 30);
+        positions[25] = new Vector3(-100, -165, 50);
+        positions[26] = new Vector3(-80, -165, 25);
+        positions[27] = new Vector3(-60, -165, 0);
+
+    }
+
+
+    public void DestroyBooks() {
+        GameObject[] books_orange = GameObject.FindGameObjectsWithTag("BookOrange");
+        GameObject[] books_bordeaux = GameObject.FindGameObjectsWithTag("BookBordeaux");
+        GameObject[] books_blue = GameObject.FindGameObjectsWithTag("BookBlue");
+        GameObject[] books_yellow = GameObject.FindGameObjectsWithTag("BookYellow");
+        foreach (GameObject bo in books_orange) {
+            Destroy(bo);
+        }
+        foreach (GameObject bbo in books_bordeaux) {
+            Destroy(bbo);
+        }
+        foreach (GameObject bbl in books_blue) {
+            Destroy(bbl);
+        }
+        foreach (GameObject by in books_yellow) {
+            Destroy(by);
+        }
+
+    }
+
+    public void DestroyCoins() {
+        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coins");
+        foreach (GameObject c in coins) {
+            Destroy(c);
+        }
+
+    }
+
+    public void GenerateBooks() {
+        GameObject[] books_blue = new GameObject[Definitions.MAX_BLUE];
+        GameObject[] books_bordeaux = new GameObject[Definitions.MAX_BORDEAUX];
+        GameObject[] books_orange = new GameObject[Definitions.MAX_ORANGE];
+        GameObject[] books_yellow = new GameObject[Definitions.MAX_YELLOW];
+        int rp;
+
+        for (int i = 0; i < Definitions.MAX_BLUE; i++) {
+           // do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);                
+           // } while(usedPositions.Contains(positions[rp]));
+           // usedPositions.Add(positions[rp]);
+          //  books_blue[i] = Instantiate(GameObject.Find("Book_Blue"), new Vector3(120, -165, 120), new Quaternion()) as GameObject;
+            books_blue[i] = Instantiate(GameObject.Find("Book_Blue"), positions[0], new Quaternion()) as GameObject;
+        }
+
+        for (int i = 0; i < Definitions.MAX_BORDEAUX; i++) {
+         //   do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+         //   } while (usedPositions.Contains(positions[rp]));
+//            usedPositions.Add(positions[rp]);
+            books_bordeaux[i] = Instantiate(GameObject.Find("Book_Bordeaux"), positions[rp], new Quaternion()) as GameObject;
+        }
+
+        for (int i = 0; i < Definitions.MAX_ORANGE; i++) {
+        //    do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+        //    } while (usedPositions.Contains(positions[rp]));
+            //usedPositions.Add(positions[rp]);
+            books_orange[i] = Instantiate(GameObject.Find("Book_Orange"), positions[rp], new Quaternion()) as GameObject;
+        }
+
+        for (int i = 0; i < Definitions.MAX_YELLOW; i++) {
+         //   do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+         //   } while (usedPositions.Contains(positions[rp]));
+            //usedPositions.Add(positions[rp]);
+            books_yellow[i] = Instantiate(GameObject.Find("Book_Yellow"), positions[rp], new Quaternion()) as GameObject;
+        }
+
+       
+    }
+
+    public void GenerateCoins() {
+    }
+
     // Game End
     public void EndGame(bool timeup) {
         
@@ -90,7 +222,9 @@ public class GameState : MonoBehaviour {
         Players = new SortedDictionary<string, PlayerScore>();
         ReadPlayersFromFile(Definitions.PLAYERS_FILE);
         AddCurrentPlayerToBestScores();
-        WritePlayersToFile(Definitions.PLAYERS_FILE);    
+        WritePlayersToFile(Definitions.PLAYERS_FILE);
+
+        SortTopPlayers();
 
         ChangeLevel(Definitions.Levels.END);
     }
@@ -169,16 +303,12 @@ public class GameState : MonoBehaviour {
         
         if (CurrentMode == Definitions.GameMode.PLAYING) {
             if(Definitions.Debug) Debug.Log("Pause on");                      
-            // freeze game
             FreezeGame(true);
-            // update mode
             CurrentMode = Definitions.GameMode.PAUSE;            
         }
         else {
             if (Definitions.Debug) Debug.Log("Pause off");
-            // unfreeze game
             FreezeGame(false);
-            // update mode
             CurrentMode = Definitions.GameMode.PLAYING;
         }
     }
@@ -204,6 +334,13 @@ public class GameState : MonoBehaviour {
     }
 
     // Players info
+
+    void SortTopPlayers() {
+        //tpComparer = new TopPlayersComparer(Players);
+        //TopPlayers = tpComparer.list;
+        //Debug.Log("jogador: " + TopPlayers.Values[0]);
+    }
+
     void ReadPlayersFromFile(string filename) {
         string name;
         int score;

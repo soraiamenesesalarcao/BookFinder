@@ -12,11 +12,18 @@ public static class Definitions {
     public const float DURATION = 300;
 
     // Values
+    public const int COLLECTIBLE_POSITIONS = 28;
 
     public const int MIN_ORANGE = 1;
     public const int MIN_YELLOW = 1;
     public const int MIN_BORDEAUX = 1;
     public const int MIN_BLUE = 1;
+
+    public const int MAX_ORANGE = 4;
+    public const int MAX_YELLOW = 3;
+    public const int MAX_BORDEAUX = 2;
+    public const int MAX_BLUE = 1;
+    public const int MAX_COINS = 5;
 
     public const int SCORE_ORANGE = 5; 
     public const int SCORE_YELLOW = 10;
@@ -28,7 +35,7 @@ public static class Definitions {
     public const int MAX_LIVES = 3;
     public const int MAX_LIFE = 99;
 
-    public const int DAMAGE_ENEMY_BULLET = 1;
+    public const int DAMAGE_ENEMY_BULLET = 5;
 
     // End Screen
     public const int MAX_BEST_PLAYERS = 10;
