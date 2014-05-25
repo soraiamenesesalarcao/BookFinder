@@ -24,6 +24,15 @@ public class CollisionBullet : MonoBehaviour {
                 gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
             if (gameObject.name.Contains("BulletTurret4"))
                 gameObject.transform.Translate(transform.right * Time.deltaTime * 15f);
+            if (gameObject.name.Contains("BulletSkeleton1"))
+                gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
+            if (gameObject.name.Contains("BulletSkeleton2"))
+                gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
+            if (gameObject.name.Contains("BulletSkeleton3"))
+                gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
+            if (gameObject.name.Contains("BulletSkeleton4"))
+                gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
+
 
         }
         else {

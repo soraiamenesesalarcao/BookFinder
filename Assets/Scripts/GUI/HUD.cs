@@ -109,7 +109,7 @@ public class HUD : MonoBehaviour {
             GUILayout.Space(20);
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_blue, ItemCountStyle);
+            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_blue + "/1", ItemCountStyle);
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
             GUILayout.FlexibleSpace();
@@ -121,7 +121,7 @@ public class HUD : MonoBehaviour {
             GUILayout.Space(20);
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_bordeaux, ItemCountStyle);
+            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_bordeaux + "/1", ItemCountStyle);
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
             GUILayout.FlexibleSpace();
@@ -133,7 +133,7 @@ public class HUD : MonoBehaviour {
             GUILayout.Space(20);
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_orange, ItemCountStyle);
+            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_orange + "/1", ItemCountStyle);
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
             GUILayout.FlexibleSpace();
@@ -145,7 +145,7 @@ public class HUD : MonoBehaviour {
             GUILayout.Space(20);
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_yellow, ItemCountStyle);
+            GUILayout.Label("" + GameState.CurrentPlayer.Items.book_yellow + "/1", ItemCountStyle);
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
             GUILayout.FlexibleSpace();

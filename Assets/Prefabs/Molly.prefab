@@ -1023,7 +1023,7 @@ MonoBehaviour:
   minimumX: 0
   maximumX: 360
   minimumY: 0
-  maximumY: 45
+  maximumY: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

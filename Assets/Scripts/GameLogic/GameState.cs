@@ -220,7 +220,7 @@ public class GameState : MonoBehaviour {
         Players = new SortedDictionary<string, PlayerScore>();
         //ReadPlayersFromFile(Definitions.PLAYERS_FILE);
         ReadPlayersFromFile(Definitions.PLAYERS_FILE_SA);
-        AddCurrentPlayerToBestScores();
+        if(HasWon) AddCurrentPlayerToBestScores();
         //WritePlayersToFile(Definitions.PLAYERS_FILE);
         WritePlayersToFile(Definitions.PLAYERS_FILE_SA);
 

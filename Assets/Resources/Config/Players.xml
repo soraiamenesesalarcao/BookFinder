@@ -27,4 +27,8 @@
     <name>S</name>
     <score>149</score>
   </player>
+  <player>
+    <name>Teste</name>
+    <score>47</score>
+  </player>
 </players>
