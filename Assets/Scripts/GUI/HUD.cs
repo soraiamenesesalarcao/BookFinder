@@ -15,6 +15,8 @@ public class HUD : MonoBehaviour {
     public Texture2D YellowTex;
     public Texture2D BlueTex;
     public Texture2D BordeauxTex;
+    public Texture2D BulletBuckyTex;
+    public Texture2D BulletSplitTex;
     private Texture2D infoBackgroundTex;
     private Texture2D inventoryBackgroundTex;
     private Texture2D inventoryHiddenBackgroundTex;
@@ -74,6 +76,15 @@ public class HUD : MonoBehaviour {
             GUILayout.Label(LifeTex);
             GUILayout.Space(5);
         }
+        GUILayout.EndHorizontal();
+
+        GUILayout.FlexibleSpace();
+
+        // Energy
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Energy: ", LabelStyle, GUILayout.Width(75));
+        GUILayout.Space(10);
+        GUILayout.Label("" + GameState.CurrentPlayer.Energy, ValueStyle);
         GUILayout.EndHorizontal();
 
         GUILayout.FlexibleSpace();

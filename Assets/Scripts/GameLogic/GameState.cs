@@ -22,10 +22,10 @@ public class GameState : MonoBehaviour {
     public static SortedList<string, PlayerScore> TopPlayers;
     public static CharacterInfo CurrentPlayer; 
 
-
     public static bool HasWon = true;
 
     public static float TimeGame { get; set; }
+    public static float TimeShield { get; set; }
     private float savedTimeScale = -1;
 
     private System.Random rndPositions = new System.Random();
@@ -37,19 +37,25 @@ public class GameState : MonoBehaviour {
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
-        TimeGame = 0;
-        //Debug.Log("Fui chamado e estou em " + CurrentLevel);
+        TimeGame = Time.time;
         if (CurrentLevel == Definitions.Levels.GAME) {
             usedPositions = new ArrayList();
             InitPositions();
             DestroyBooks();
+            DestroyCakes();
+            //DestroyBullets();
+            DestroyShields();
             GenerateBooks();
-        }
-
+            GenerateCakes();
+            //GenerateBullets();
+            GenerateShields();        }
     }
 
     void Start() {
-        CurrentMode = Definitions.GameMode.PLAYING;        
+        CurrentMode = Definitions.GameMode.PLAYING;
+        GameObject shield = GameObject.Find("Shield_Molly");
+        Shield s = shield.GetComponent<Shield>() as Shield;
+        s.deactivateShield();
     }
     	
 	// Update is called once per frame
@@ -57,7 +63,14 @@ public class GameState : MonoBehaviour {
         if (CurrentLevel == Definitions.Levels.GAME) {
             if (CurrentMode == Definitions.GameMode.PLAYING) {
                 TimeGame = Time.timeSinceLevelLoad;
-                // outras coisas
+
+                // Shield
+                if (CurrentPlayer.HasShield && (Time.time - TimeShield >= 10.0f)) {
+                    GameObject shield = GameObject.Find("Shield_Molly");
+                    Shield s = shield.GetComponent<Shield>() as Shield;
+                    s.deactivateShield();
+                    TimeShield = 0;
+                }
             }
             HandleInput();
         }
@@ -124,7 +137,6 @@ public class GameState : MonoBehaviour {
         positions[25] = new Vector3(-100, -165, 50);
         positions[26] = new Vector3(-80, -165, 25);
         positions[27] = new Vector3(-60, -165, 0);
-
     }
 
 
@@ -145,15 +157,31 @@ public class GameState : MonoBehaviour {
         foreach (GameObject by in books_yellow) {
             Destroy(by);
         }
-
     }
 
-    public void DestroyCoins() {
-        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coins");
-        foreach (GameObject c in coins) {
-            Destroy(c);
+    public void DestroyCakes() {
+        GameObject[] cakes = GameObject.FindGameObjectsWithTag("Cake");
+        foreach (GameObject ca in cakes) {
+            Destroy(ca);
         }
+    }
 
+    public void DestroyShields() {
+        GameObject[] shields = GameObject.FindGameObjectsWithTag("Shield");
+        foreach (GameObject sh in shields) {
+            Destroy(sh);
+        }
+    }
+
+    public void DestroyBullets() {
+        GameObject[] bullets_split = GameObject.FindGameObjectsWithTag("BulletSplit");
+        GameObject[] bullets_bucky = GameObject.FindGameObjectsWithTag("BulletBucky");
+        foreach (GameObject bs in bullets_split) {
+            Destroy(bs);
+        }
+        foreach (GameObject bc in bullets_bucky) {
+            Destroy(bc);
+        }
     }
 
     public void GenerateBooks() {
@@ -203,7 +231,77 @@ public class GameState : MonoBehaviour {
        
     }
 
-    public void GenerateCoins() {
+    public void GenerateCakes() {
+        GameObject[] cakes = new GameObject[Definitions.MAX_CAKES];
+        int rp;
+
+        for (int i = 0; i < Definitions.MAX_CAKES; i++) {
+            do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+            } while (usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
+            cakes[i] = Instantiate(GameObject.Find("Cake"), positions[rp], new Quaternion()) as GameObject;
+        }
+
+        /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Light");
+        foreach (GameObject go in gos) {
+            if (go.name.Contains("Book")) {
+                go.light.enabled = true;
+            }
+        }*/
+
+    }
+
+    public void GenerateShields() {
+        GameObject[] shields = new GameObject[Definitions.MAX_SHIELD];
+        int rp;
+
+        for (int i = 0; i < Definitions.MAX_SHIELD; i++) {
+            do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+            } while (usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
+            shields[i] = Instantiate(GameObject.Find("Shield"), positions[rp], new Quaternion()) as GameObject;
+            shields[i].transform.Rotate(new Vector3(1, 0, 0), -90);
+            shields[i].transform.Rotate(new Vector3(0, 0, 1), 90);
+        }
+
+        /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Light");
+        foreach (GameObject go in gos) {
+            if (go.name.Contains("Book")) {
+                go.light.enabled = true;
+            }
+        }*/
+    }
+
+    public void GenerateBullets() {
+        GameObject[] bullet_splits = new GameObject[Definitions.MAX_SPLIT];
+        GameObject[] bullet_buckys = new GameObject[Definitions.MAX_BUCKY];
+        int rp;
+
+        for (int i = 0; i < Definitions.MAX_SPLIT; i++) {
+            do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+            } while (usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
+            bullet_splits[i] = Instantiate(GameObject.Find("Bullet_Split"), positions[rp], new Quaternion()) as GameObject;
+        }
+
+        for (int i = 0; i < Definitions.MAX_BUCKY; i++) {
+            do {
+                rp = rndPositions.Next(0, Definitions.COLLECTIBLE_POSITIONS);
+            } while (usedPositions.Contains(positions[rp]));
+            usedPositions.Add(positions[rp]);
+            bullet_buckys[i] = Instantiate(GameObject.Find("Bullet_Bucky"), positions[rp], new Quaternion()) as GameObject;
+        }
+
+        /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Light");
+foreach (GameObject go in gos) {
+    if (go.name.Contains("Book")) {
+        go.light.enabled = true;
+    }
+}*/
+    
     }
 
     // Game End
@@ -259,14 +357,14 @@ public class GameState : MonoBehaviour {
     public void FreezeGame(bool freeze) {
         GameObject map = GameObject.Find("MiniMap");
         GameObject player = GameObject.Find("Molly");
-        CharacterMotor playerMotor;
+        MyCharacterMotor playerMotor;
         FPSInputController playerInput;
         MouseLook playerCameraX, playerCameraY;
 
         if (freeze) {
             if (map != null) map.camera.enabled = false;
             if (player != null) {
-                playerMotor = player.GetComponent(typeof(CharacterMotor)) as CharacterMotor;
+                playerMotor = player.GetComponent(typeof(MyCharacterMotor)) as MyCharacterMotor;
                 playerMotor.enabled = false;
                 playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
                 playerInput.enabled = false;
@@ -282,7 +380,7 @@ public class GameState : MonoBehaviour {
         else {
             if (map != null) map.camera.enabled = true;
             if (player != null) {
-                playerMotor = player.GetComponent(typeof(CharacterMotor)) as CharacterMotor;
+                playerMotor = player.GetComponent(typeof(MyCharacterMotor)) as MyCharacterMotor;
                 playerMotor.enabled = true;
                 playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
                 playerInput.enabled = true;

@@ -23,19 +23,27 @@ public static class Definitions {
     public const int MAX_YELLOW = 3;
     public const int MAX_BORDEAUX = 2;
     public const int MAX_BLUE = 1;
-    public const int MAX_COINS = 5;
 
     public const int SCORE_ORANGE = 5; 
     public const int SCORE_YELLOW = 10;
     public const int SCORE_BORDEAUX = 15;
     public const int SCORE_BLUE = 20;
-    public const int SCORE_COIN = 10;
-    public const int COIN_AMOUNT = 10;
+
+    public const int MAX_BUCKY = 4;
+    public const int MAX_SPLIT = 2;
+    public const int MAX_CAKES = 3;
+    public const int MAX_SHIELD = 5;
 
     public const int MAX_LIVES = 3;
     public const int MAX_LIFE = 99;
+    public const int MAX_ENERGY = 100;
+
+    public const int ADD_ENERGY = 15;
+    public const int TIMER_SHIELD = 10; //seconds
 
     public const int DAMAGE_ENEMY_BULLET = 5;
+    public const int DAMAGE_MOLLY_BUCKY = 5;
+    public const int DAMAGE_MOLLY_SPLIT = 10;
 
     // End Screen
     public const int MAX_BEST_PLAYERS = 10;

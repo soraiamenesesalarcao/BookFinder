@@ -20,15 +20,16 @@ TagManager:
   - Monster
   - ObstacleFixed
   - Rooms
-  - 
+  - Shield
   - Room1
-  - 
+  - Cake
   - BookOrange
   - BookBordeaux
   - BookBlue
   - BookYellow
-  - Coins
+  - BulletSplit
   - HallS
+  - BulletBucky
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

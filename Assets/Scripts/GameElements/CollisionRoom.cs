@@ -120,7 +120,6 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall4")) {
                 turnOnTorchs("Hall4");
-                turnOnLight("LightSkeleton1");
                 changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall5")) {
@@ -137,11 +136,11 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall8")) {
                 turnOnTorchs("Hall8");
+                turnOnLight("LightSkeleton1");
                 changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall9")) {
                 turnOnTorchs("Hall9");
-                turnOnLight("LightSkeleton3");
                 changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall10")) {
@@ -154,6 +153,7 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall12")) {
                 turnOnTorchs("Hall12");
+                turnOnLight("LightSkeleton3");
                 changeLightColor("AmbientLight");
             }
             if (this.name.Equals("Hall13")) {
@@ -241,7 +241,6 @@ public class CollisionRoom : MonoBehaviour {
             }
             if (this.name.Equals("Hall4")) {
                 turnOffTorchs("Hall4");
-                turnOffLight("LightSkeleton1");
             }
             if (this.name.Equals("Hall5")) {
                 turnOffTorchs("Hall5");
@@ -254,11 +253,11 @@ public class CollisionRoom : MonoBehaviour {
                 turnOffTorchs("Hall7");
             }
             if (this.name.Equals("Hall8")) {
+                turnOffLight("LightSkeleton1");
                 turnOffTorchs("Hall8");
             }
             if (this.name.Equals("Hall9")) {
                 turnOffTorchs("Hall9");
-                turnOffLight("LightSkeleton3");
             }
             if (this.name.Equals("Hall10")) {
                 turnOffTorchs("Hall10");
@@ -268,6 +267,7 @@ public class CollisionRoom : MonoBehaviour {
                 turnOffLight("LightTurret3");
             }
             if (this.name.Equals("Hall12")) {
+                turnOffLight("LightSkeleton3");
                 turnOffTorchs("Hall12");
             }
             if (this.name.Equals("Hall13")) {

@@ -7,7 +7,8 @@ public class Inventory {
     public int book_yellow;
     public int book_bordeaux;
     public int book_blue;
-    public int coins;
+    public int bullet_split;
+    public int bullet_bucky;
 
 
 	public Inventory() {
@@ -15,7 +16,8 @@ public class Inventory {
         book_yellow = 0;
         book_bordeaux = 0;
         book_blue = 0;
-        coins = 0;
+        bullet_split = 0;
+        bullet_bucky = 0;
 	}	
 	
 }

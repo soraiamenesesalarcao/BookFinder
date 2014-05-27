@@ -18,21 +18,38 @@ public class CollisionBullet : MonoBehaviour {
                 audioInfo++;
             }
 
-            if (gameObject.name.Contains("BulletTurret1") || gameObject.name.Contains("BulletTurret2"))
+            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector3 bulletPosition = transform.position;
+            Vector3 direction = (playerPosition - bulletPosition).normalized;
+
+            if (gameObject.name.Contains("BulletTurret1") || gameObject.name.Contains("BulletTurret2") ||
+                gameObject.name.Contains("BulletTurret3") || gameObject.name.Contains("BulletTurret4") ||
+                gameObject.name.Contains("BulletSkeleton1") || gameObject.name.Contains("BulletSkeleton2") ||
+                gameObject.name.Contains("BulletSkeleton3") || gameObject.name.Contains("BulletSkeleton4") )
+                    gameObject.transform.Translate(direction * Time.deltaTime * 15f);
+
+
+/*            if (gameObject.name.Contains("BulletTurret1") || gameObject.name.Contains("BulletTurret2"))
                 gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
             if (gameObject.name.Contains("BulletTurret3"))
                 gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
             if (gameObject.name.Contains("BulletTurret4"))
                 gameObject.transform.Translate(transform.right * Time.deltaTime * 15f);
-            if (gameObject.name.Contains("BulletSkeleton1"))
+            if (gameObject.name.Contains("BulletSkeleton1")) {
+
                 gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
-            if (gameObject.name.Contains("BulletSkeleton2"))
-                gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
+            
+            }
+            if (gameObject.name.Contains("BulletSkeleton2")) {
+
+                gameObject.transform.Translate(direction * Time.deltaTime * 15f);
+                //gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
+            }
             if (gameObject.name.Contains("BulletSkeleton3"))
                 gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
             if (gameObject.name.Contains("BulletSkeleton4"))
                 gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
-
+            */
 
         }
         else {
@@ -48,7 +65,8 @@ public class CollisionBullet : MonoBehaviour {
             gameObject.transform.FindChild("ShockFlame").FindChild("Flame").particleSystem.Play();
             shoot = false;
 
-            if (c.CompareTag("Player")) {
+            if (c.CompareTag("Player") && !GameState.CurrentPlayer.HasShield) {
+                Debug.Log("Vou fazer dano!");
                 GameState.CurrentPlayer.Life -= Definitions.DAMAGE_ENEMY_BULLET;
                 int life = GameState.CurrentPlayer.Life;
 
@@ -56,6 +74,9 @@ public class CollisionBullet : MonoBehaviour {
                 else if (life > 0 && life <= 34) GameState.CurrentPlayer.NumberOfLives = 1;
                 else if (life > 34 && life < 67) GameState.CurrentPlayer.NumberOfLives = 2;
                 else if (life >= 67) GameState.CurrentPlayer.NumberOfLives = 3;
+            }
+            if (c.CompareTag("Player") && GameState.CurrentPlayer.HasShield) {
+                Debug.Log("NÃO Vou fazer dano!");
             }
         }
     }
