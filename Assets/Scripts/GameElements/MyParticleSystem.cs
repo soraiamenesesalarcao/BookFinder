@@ -54,6 +54,7 @@ public abstract class MyParticleSystem : MonoBehaviour {
         GameObject go;
         MyParticle p;
         Vector3 pos2 = transform.position;
+        InitialPosition = pos2;
         //Vector3 pos2 = new Vector3(-17, -148, 20);
 
         IsActive = true;
@@ -71,7 +72,6 @@ public abstract class MyParticleSystem : MonoBehaviour {
             
             // first instantiation
             for (int i = 0; i < NumMaxParticles; i++) {
-                Debug.Log("pos2: " + pos2);
                 //go = Instantiate(GameObject.Find("ParticleSphere"), pos, new Quaternion()) as GameObject;
                 go = Instantiate(GameObject.Find("ParticleSphere"), pos2, new Quaternion()) as GameObject;
                 p = go.GetComponent(typeof(MyParticle)) as MyParticle;
@@ -91,39 +91,20 @@ public abstract class MyParticleSystem : MonoBehaviour {
     }
 
     public abstract void InitFormulas();
-
+    public abstract void InitPosition(MyParticle p, Vector3 pos);
     public abstract void InitVelocity(MyParticle p);
+    public abstract void InitAcceleration(MyParticle p);
+    public abstract void UpdateAcceleration(MyParticle p);
 
     public void InitParticle(MyParticle p, Vector3 pos) {
-        // circular fireworks
-        //phi = (float)rg.NextDouble() * Mathf.PI;
-        //theta = (float)rg.NextDouble() * 2 * Mathf.PI;
-        //baseVelocity = (float)rg.NextDouble() * 0.8f + 0.2f;
         InitFormulas();
 
         p.LifeTime = 1.0f;
-
         p.Mat = ParticleMaterial;
-
-        //p.Position.x = p.PreviousPosition.x = transform.position.x;
-        //p.Position.y = p.PreviousPosition.y = transform.position.y;
-        //p.Position.z = p.PreviousPosition.z = transform.position.z;
-
-        p.Position.x = p.PreviousPosition.x = pos.x;
-        p.Position.y = p.PreviousPosition.y = pos.y;
-        p.Position.z = p.PreviousPosition.z = pos.z;
-
-        p.PreviousPosition.x = p.PreviousVelocity.y = p.PreviousVelocity.z = 0;
-        // depending on system type
-        //p.Velocity.x = baseVelocity * Mathf.Cos(theta) * Mathf.Sin(phi);
-        //p.Velocity.y = baseVelocity * Mathf.Cos(phi);
-        //p.Velocity.z = baseVelocity * Mathf.Sin(theta) * Mathf.Sin(phi);
+        InitPosition(p, pos);
+        p.PreviousVelocity.x = p.PreviousVelocity.y = p.PreviousVelocity.z = 0;
         InitVelocity(p);
-
-        p.Acceleration.x = (p.Velocity.x - p.PreviousVelocity.x) / Time.deltaTime;
-        p.Acceleration.y = (p.Velocity.y - p.PreviousVelocity.y) / Time.deltaTime;
-        p.Acceleration.z = (p.Velocity.z - p.PreviousVelocity.z) / Time.deltaTime;
-
+        InitAcceleration(p);
         p.Size = 0.1f;
     }
 
@@ -149,12 +130,6 @@ public abstract class MyParticleSystem : MonoBehaviour {
         p.Velocity.x = p.PreviousVelocity.x + Time.deltaTime * p.Acceleration.x;
         p.Velocity.y = p.PreviousVelocity.y + Time.deltaTime * p.Acceleration.y;
         p.Velocity.z = p.PreviousVelocity.z + Time.deltaTime * p.Acceleration.z;
-    }
-
-    protected void UpdateAcceleration(MyParticle p) {
-        p.Acceleration.x = (p.Velocity.x - p.PreviousVelocity.x) / Time.deltaTime;
-        p.Acceleration.y = (p.Velocity.y - p.PreviousVelocity.y) / Time.deltaTime;
-        p.Acceleration.z = (p.Velocity.z - p.PreviousVelocity.z) / Time.deltaTime;
     }
 
     protected void UpdateSize(MyParticle p) {

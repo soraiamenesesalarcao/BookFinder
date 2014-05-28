@@ -366,8 +366,8 @@ foreach (GameObject go in gos) {
             if (player != null) {
                 playerMotor = player.GetComponent(typeof(MyCharacterMotor)) as MyCharacterMotor;
                 playerMotor.enabled = false;
-                playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
-                playerInput.enabled = false;
+               // playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
+               // playerInput.enabled = false;
                 playerCameraY = player.transform.FindChild("Main Camera").GetComponent(typeof(MouseLook)) as MouseLook;
                 playerCameraY.enabled = false;
                 playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;
@@ -382,8 +382,8 @@ foreach (GameObject go in gos) {
             if (player != null) {
                 playerMotor = player.GetComponent(typeof(MyCharacterMotor)) as MyCharacterMotor;
                 playerMotor.enabled = true;
-                playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
-                playerInput.enabled = true;
+                //playerInput = player.GetComponent(typeof(FPSInputController)) as FPSInputController;
+                //playerInput.enabled = true;
                 playerCameraY = player.transform.FindChild("Main Camera").GetComponent(typeof(MouseLook)) as MouseLook;
                 playerCameraY.enabled = true;
                 playerCameraX = player.GetComponent(typeof(MouseLook)) as MouseLook;

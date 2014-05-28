@@ -4,8 +4,8 @@ using System.Collections;
 public class MyCharacterMotor : MonoBehaviour {
  
     public float speed;
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
+    public float jumpSpeed = 50.0F;
+    public float gravity = -10.0F;
 
     public float incEnergy = 0;
 
@@ -18,10 +18,10 @@ public class MyCharacterMotor : MonoBehaviour {
     void Update() {
         CharacterController controller = gameObject.GetComponent<CharacterController>();
 
-        if (GameState.CurrentPlayer.Energy <= 25) speed = 10.0f;
-        else if (GameState.CurrentPlayer.Energy <= 50) speed = 15.0f;
-        else if (GameState.CurrentPlayer.Energy <= 75) speed = 20.0f;
-        else if (GameState.CurrentPlayer.Energy <= 100) speed = 25.0f;
+        if (GameState.CurrentPlayer.Energy <= 25) speed = 20.0f;
+        else if (GameState.CurrentPlayer.Energy <= 50) speed = 25.0f;
+        else if (GameState.CurrentPlayer.Energy <= 75) speed = 30.0f;
+        else if (GameState.CurrentPlayer.Energy <= 100) speed = 45.0f;
 
         if (controller.isGrounded == true) {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));

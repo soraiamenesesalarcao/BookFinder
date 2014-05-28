@@ -100,13 +100,15 @@ public class CollisionRoom : MonoBehaviour {
                 turnOnTorchs("Room2");
                 changeLightColor("AmbientLight");
 
-                Debug.Log("Vou explodir!");
                 ExplosionPS explosion = GameObject.Find("Explosion").GetComponent("ExplosionPS") as ExplosionPS;
                 explosion.InitSP();
             }
             if (this.name.Equals("Room3")) {
                 turnOnTorchs("Room3");
                 changeLightColor("AmbientLight");
+                // ser find all objects
+                WaterPS water = GameObject.Find("Water").GetComponent("WaterPS") as WaterPS;
+                water.InitSP();
             }
 
             if (this.name.Equals("Hall1")) {

@@ -15,6 +15,24 @@ public class ExplosionPS : MyParticleSystem {
         p.Velocity.z = baseVelocity * Mathf.Sin(theta) * Mathf.Sin(phi);
     }
 
+    public override void InitAcceleration(MyParticle p) {
+        p.Acceleration.x = (p.Velocity.x - p.PreviousVelocity.x) / Time.deltaTime;
+        p.Acceleration.y = (p.Velocity.y - p.PreviousVelocity.y) / Time.deltaTime;
+        p.Acceleration.z = (p.Velocity.z - p.PreviousVelocity.z) / Time.deltaTime;
+    }
+
+    public override void InitPosition(MyParticle p, Vector3 pos) {
+        p.Position.x = p.PreviousPosition.x = pos.x;
+        p.Position.y = p.PreviousPosition.y = pos.y;
+        p.Position.z = p.PreviousPosition.z = pos.z;
+    }
+
+    public override void UpdateAcceleration(MyParticle p) {
+        p.Acceleration.x = (p.Velocity.x - p.PreviousVelocity.x) / Time.deltaTime;
+        p.Acceleration.y = (p.Velocity.y - p.PreviousVelocity.y) / Time.deltaTime;
+        p.Acceleration.z = (p.Velocity.z - p.PreviousVelocity.z) / Time.deltaTime;
+    }
+
     void Update() {
 
         if (IsActive) {
@@ -42,9 +60,6 @@ public class ExplosionPS : MyParticleSystem {
                         UpdateVelocity(p);
                         UpdateAcceleration(p);
                     }
-                    //else {
-                    //    InitParticle(p);
-                    //}
                 }
             }
         }

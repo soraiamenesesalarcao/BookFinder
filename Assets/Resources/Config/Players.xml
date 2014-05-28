@@ -31,4 +31,8 @@
     <name>Teste</name>
     <score>47</score>
   </player>
+  <player>
+    <name>ze maria</name>
+    <score>223</score>
+  </player>
 </players>
