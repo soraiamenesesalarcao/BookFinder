@@ -20,37 +20,13 @@ public class CollisionBullet : MonoBehaviour {
 
             Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 bulletPosition = transform.position;
+
             Vector3 direction = (playerPosition - bulletPosition).normalized;
 
             if (gameObject.name.Contains("BulletTurret1") || gameObject.name.Contains("BulletTurret2") ||
                 gameObject.name.Contains("BulletTurret3") || gameObject.name.Contains("BulletTurret4") ||
-                gameObject.name.Contains("BulletSkeleton1") || gameObject.name.Contains("BulletSkeleton2") ||
-                gameObject.name.Contains("BulletSkeleton3") || gameObject.name.Contains("BulletSkeleton4") )
+                gameObject.name.Contains("BulletSkeleton1") || gameObject.name.Contains("BulletSkeleton2") )
                     gameObject.transform.Translate(direction * Time.deltaTime * 15f);
-
-
-/*            if (gameObject.name.Contains("BulletTurret1") || gameObject.name.Contains("BulletTurret2"))
-                gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
-            if (gameObject.name.Contains("BulletTurret3"))
-                gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
-            if (gameObject.name.Contains("BulletTurret4"))
-                gameObject.transform.Translate(transform.right * Time.deltaTime * 15f);
-            if (gameObject.name.Contains("BulletSkeleton1")) {
-
-                gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
-            
-            }
-            if (gameObject.name.Contains("BulletSkeleton2")) {
-
-                gameObject.transform.Translate(direction * Time.deltaTime * 15f);
-                //gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
-            }
-            if (gameObject.name.Contains("BulletSkeleton3"))
-                gameObject.transform.Translate(transform.forward * Time.deltaTime * 15f);
-            if (gameObject.name.Contains("BulletSkeleton4"))
-                gameObject.transform.Translate(-transform.right * Time.deltaTime * 15f);
-            */
-
         }
         else {
             if (gameObject.name.Contains("(Clone)") && 

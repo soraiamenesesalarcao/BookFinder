@@ -16,7 +16,7 @@ public class CharacterInfo {
         Name = name;
         NumberOfLives = Definitions.MAX_LIVES;
         Life = Definitions.MAX_LIFE;
-        Energy = Definitions.MAX_ENERGY/2;
+        Energy = Definitions.MAX_ENERGY;
         Score = 0;
         Items = new Inventory();
         TimePlayed = 0;
