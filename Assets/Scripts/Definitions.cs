@@ -12,7 +12,7 @@ public static class Definitions {
     public const float DURATION = 300;
 
     // Values
-    public const int COLLECTIBLE_POSITIONS = 28;
+    public const int COLLECTIBLE_POSITIONS = 27;
 
     public const int MIN_ORANGE = 1;
     public const int MIN_YELLOW = 1;

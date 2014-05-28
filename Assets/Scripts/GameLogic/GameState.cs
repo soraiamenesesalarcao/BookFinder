@@ -109,34 +109,34 @@ public class GameState : MonoBehaviour {
 
         positions[0] = new Vector3(120, -165, 120);
         positions[1] = new Vector3(10, -165, 85);
-        positions[2] = new Vector3(0, -165, -75);
-        positions[3] = new Vector3(115, -165, 10);
-        positions[4] = new Vector3(80, -165, -75);
-        positions[5] = new Vector3(80, -165, -115);
-        positions[6] = new Vector3(-20, -165, 15);
-        positions[7] = new Vector3(30, -165, 0);
-        positions[8] = new Vector3(20, -165, -25);
-        positions[9] = new Vector3(40, -165, 120);
+        //positions[1] = new Vector3(0, -165, -75);
+        positions[2] = new Vector3(115, -165, 10);
+        positions[3] = new Vector3(80, -165, -75);
+        positions[4] = new Vector3(80, -165, -115);
+        positions[5] = new Vector3(-20, -165, 15);
+        positions[6] = new Vector3(30, -165, 0);
+        positions[7] = new Vector3(20, -165, -25);
+        positions[8] = new Vector3(40, -165, 120);
 
-        positions[10] = new Vector3(0, -165, 20);
-        positions[11] = new Vector3(60, -165, 80);
-        positions[12] = new Vector3(60, -165, 105);
-        positions[13] = new Vector3(0, -165, 140);
-        positions[14] = new Vector3(-40, -165, 70);
-        positions[15] = new Vector3(-70, -165, 105);
-        positions[16] = new Vector3(-110, -165, 140);
-        positions[17] = new Vector3(-120, -165, 80);
-        positions[18] = new Vector3(-100, -165, 90);
-        positions[19] = new Vector3(-60, -165, -120);
+        positions[9] = new Vector3(0, -165, 20);
+        positions[10] = new Vector3(60, -165, 80);
+        positions[11] = new Vector3(60, -165, 105);
+        positions[12] = new Vector3(0, -165, 140);
+        positions[13] = new Vector3(-40, -165, 70);
+        positions[14] = new Vector3(-70, -165, 105);
+        positions[15] = new Vector3(-110, -165, 140);
+        positions[16] = new Vector3(-120, -165, 80);
+        positions[17] = new Vector3(-100, -165, 90);
+        positions[18] = new Vector3(-60, -165, -120);
 
-        positions[20] = new Vector3(-140, -165, -75);
-        positions[21] = new Vector3(-55, -165, -75);
-        positions[22] = new Vector3(-95, -165, -35);
-        positions[23] = new Vector3(-140, -165, 0);
-        positions[24] = new Vector3(-120, -165, 30);
-        positions[25] = new Vector3(-100, -165, 50);
-        positions[26] = new Vector3(-80, -165, 25);
-        positions[27] = new Vector3(-60, -165, 0);
+        positions[19] = new Vector3(-140, -165, -75);
+        positions[20] = new Vector3(-55, -165, -75);
+        positions[21] = new Vector3(-95, -165, -35);
+        positions[22] = new Vector3(-140, -165, 0);
+        positions[23] = new Vector3(-120, -165, 30);
+        positions[24] = new Vector3(-100, -165, 50);
+        positions[25] = new Vector3(-80, -165, 25);
+        positions[26] = new Vector3(-60, -165, 0);
     }
 
 
