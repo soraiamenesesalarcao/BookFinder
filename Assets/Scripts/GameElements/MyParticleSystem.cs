@@ -53,8 +53,8 @@ public abstract class MyParticleSystem : MonoBehaviour {
     public void InitSP() {
         GameObject go;
         MyParticle p;
-        //Vector3 pos2 = transform.position;
-        Vector3 pos2 = new Vector3(-17, -148, 20);
+        Vector3 pos2 = transform.position;
+        //Vector3 pos2 = new Vector3(-17, -148, 20);
 
         IsActive = true;
 

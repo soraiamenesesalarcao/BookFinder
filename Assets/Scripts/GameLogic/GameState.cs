@@ -48,14 +48,14 @@ public class GameState : MonoBehaviour {
             GenerateBooks();
             GenerateCakes();
             //GenerateBullets();
+            GameObject shield = GameObject.Find("Shield_Molly");
+            Shield s = shield.GetComponent<Shield>() as Shield;
+            s.deactivateShield();
             GenerateShields();        }
     }
 
     void Start() {
         CurrentMode = Definitions.GameMode.PLAYING;
-        GameObject shield = GameObject.Find("Shield_Molly");
-        Shield s = shield.GetComponent<Shield>() as Shield;
-        s.deactivateShield();
     }
     	
 	// Update is called once per frame

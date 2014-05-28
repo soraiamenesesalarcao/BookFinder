@@ -20,9 +20,9 @@ public class MyParticle : MonoBehaviour {
     }
 
     void Start() {
-        renderer.material = Mat;
+        Mat = renderer.material;
         LifeTime = 1.0f;
-        LifeTimeDelta = 0.01f;
+        LifeTimeDelta = 0.05f;
     }
 
     void Update() {
