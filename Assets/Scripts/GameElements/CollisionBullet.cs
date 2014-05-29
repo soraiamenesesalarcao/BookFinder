@@ -26,7 +26,7 @@ public class CollisionBullet : MonoBehaviour {
             if (gameObject.name.Contains("BulletTurret1") || gameObject.name.Contains("BulletTurret2") ||
                 gameObject.name.Contains("BulletTurret3") || gameObject.name.Contains("BulletTurret4") ||
                 gameObject.name.Contains("BulletSkeleton1") || gameObject.name.Contains("BulletSkeleton2") )
-                    gameObject.transform.Translate(direction * Time.deltaTime * 15f);
+                    gameObject.transform.Translate(direction * Time.deltaTime * 25f);
         }
         else {
             if (gameObject.name.Contains("(Clone)") && 

@@ -106,9 +106,6 @@ public class CollisionRoom : MonoBehaviour {
             if (this.name.Equals("Room3")) {
                 turnOnTorchs("Room3");
                 changeLightColor("AmbientLight");
-                // ser find all objects
-                WaterPS water = GameObject.Find("Water").GetComponent("WaterPS") as WaterPS;
-                water.InitSP();
             }
 
             if (this.name.Equals("Hall1")) {
@@ -119,6 +116,13 @@ public class CollisionRoom : MonoBehaviour {
             if (this.name.Equals("Hall2")) {
                 turnOnTorchs("Hall2");
                 changeLightColor("AmbientLight");
+                GameObject[] waters = GameObject.FindGameObjectsWithTag("Water");
+
+                foreach (GameObject g in waters) {
+                    Debug.Log(g.name + ": " + g.transform.position);
+                    WaterPS water = g.GetComponent("WaterPS") as WaterPS;
+                    water.InitSP();
+                }
             }
             if (this.name.Equals("Hall3")) {
                 turnOnTorchs("Hall3");
@@ -195,6 +199,13 @@ public class CollisionRoom : MonoBehaviour {
             if (this.name.Equals("Hall20")) {
                 turnOnTorchs("Hall20");
                 changeLightColor("AmbientLight");
+                GameObject[] waters = GameObject.FindGameObjectsWithTag("Water");
+
+                foreach (GameObject g in waters) {
+                    Debug.Log(g.name + ": " + g.transform.position);
+                    WaterPS water = g.GetComponent("WaterPS") as WaterPS;
+                    water.InitSP();
+                }
             }
             if (this.name.Equals("Hall21")) {
                 turnOnTorchs("Hall21");

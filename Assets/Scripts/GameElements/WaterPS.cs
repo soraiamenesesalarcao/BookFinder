@@ -4,9 +4,9 @@ using System.Collections;
 public class WaterPS : MyParticleSystem {
 
     public override void InitFormulas() {
-        phi = (float)rg.NextDouble() * 2* Mathf.PI;
-        theta = 30;
-        baseVelocity = (float)rg.NextDouble() * 0.8f + 0.2f;
+        phi = (float)rg.NextDouble() * Mathf.PI/3; ; //(float)rg.NextDouble() * 2* Mathf.PI;
+        theta = (float)rg.NextDouble() * Mathf.PI/3;
+        baseVelocity = 0.001f; // (float)rg.NextDouble() * 0.8f + 0.2f;
     }
 
     public override void InitVelocity(MyParticle p) {
@@ -22,9 +22,9 @@ public class WaterPS : MyParticleSystem {
     }
 
     public override void InitPosition(MyParticle p, Vector3 pos) {
-        p.Position.x = p.PreviousPosition.x = pos.x;
-        p.Position.y = p.PreviousPosition.y = pos.y;
-        p.Position.z = p.PreviousPosition.z = pos.z;
+        p.Position.x = p.PreviousPosition.x = pos.x + (float)(rg.NextDouble() * 1.5f);
+        p.Position.y = p.PreviousPosition.y = pos.y - (float)(rg.NextDouble() * 10.0f);
+        p.Position.z = p.PreviousPosition.z = pos.z + (float)(rg.NextDouble() * 1.0f); ;
     }
 
     public override void UpdateAcceleration(MyParticle p) {
@@ -37,10 +37,10 @@ public class WaterPS : MyParticleSystem {
 
         if (IsActive) {
 
-            if (NumAliveParticles <= 0) {
+            /*if (NumAliveParticles <= 0) {
                 IsActive = false;
             }
-            else {
+            else {*/
                 NumAliveParticles = 0;
 
                 foreach (GameObject g in Particles) {
@@ -63,7 +63,7 @@ public class WaterPS : MyParticleSystem {
                         InitParticle(p, InitialPosition);
                     }
                 }
-            }
+            //}
         }
 
     }
