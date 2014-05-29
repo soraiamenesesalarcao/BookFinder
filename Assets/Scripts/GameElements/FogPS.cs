@@ -31,7 +31,7 @@ public class FogPS : MyParticleSystem {
        // Debug.Log("pos no init: " + pos);
         p.Position.x = p.PreviousPosition.x = pos.x + ((float)rg.NextDouble() * 100.0f);
         p.Position.y = p.PreviousPosition.y = pos.y + ((float)rg.NextDouble() * 10.0f);
-        p.Position.z = p.PreviousPosition.z = pos.z + ((float)rg.NextDouble() * 20.0f);
+        p.Position.z = p.PreviousPosition.z = pos.z + ((float)rg.NextDouble() * 15.0f);
     }
 
     public override void UpdateAcceleration(MyParticle p) {
