@@ -99,7 +99,8 @@ public abstract class MyParticleSystem : MonoBehaviour {
     public void InitParticle(MyParticle p, Vector3 pos) {
         InitFormulas();
 
-        p.LifeTime = 1.0f;
+        //p.LifeTime = 1.0f;
+        InitLifeTime(p);
         p.Mat = ParticleMaterial;
         InitPosition(p, pos);
         p.PreviousVelocity.x = p.PreviousVelocity.y = p.PreviousVelocity.z = 0;
@@ -119,6 +120,8 @@ public abstract class MyParticleSystem : MonoBehaviour {
         p.PreviousVelocity.y = p.Velocity.y;
         p.PreviousVelocity.z = p.Velocity.z;
     }
+
+    protected abstract void InitLifeTime(MyParticle p);
 
     protected void UpdatePosition(MyParticle p) {
         p.Position.x = p.PreviousPosition.x + Time.deltaTime * p.PreviousVelocity.x;

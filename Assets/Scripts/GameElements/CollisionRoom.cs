@@ -123,6 +123,12 @@ public class CollisionRoom : MonoBehaviour {
                     WaterPS water = g.GetComponent("WaterPS") as WaterPS;
                     water.InitSP();
                 }
+                GameObject fog = GameObject.Find("Fog");
+                if (fog != null) {
+                    Debug.Log("ha fog");
+                    FogPS fogps = fog.GetComponent("FogPS") as FogPS;
+                    fogps.InitSP();
+                }
             }
             if (this.name.Equals("Hall3")) {
                 turnOnTorchs("Hall3");

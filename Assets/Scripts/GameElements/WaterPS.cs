@@ -3,6 +3,11 @@ using System.Collections;
 
 public class WaterPS : MyParticleSystem {
 
+    protected override void InitLifeTime(MyParticle p) {
+        p.LifeTime = (float)rg.NextDouble();
+        //p.LifeTime = 1.0f;
+    }
+
     public override void InitFormulas() {
         phi = (float)rg.NextDouble() * Mathf.PI/3; ; //(float)rg.NextDouble() * 2* Mathf.PI;
         theta = (float)rg.NextDouble() * Mathf.PI/3;
@@ -22,9 +27,9 @@ public class WaterPS : MyParticleSystem {
     }
 
     public override void InitPosition(MyParticle p, Vector3 pos) {
-        p.Position.x = p.PreviousPosition.x = pos.x + (float)(rg.NextDouble() * 1.5f);
+        p.Position.x = p.PreviousPosition.x = pos.x + (float)(rg.NextDouble());
         p.Position.y = p.PreviousPosition.y = pos.y - (float)(rg.NextDouble() * 10.0f);
-        p.Position.z = p.PreviousPosition.z = pos.z + (float)(rg.NextDouble() * 1.0f); ;
+        p.Position.z = p.PreviousPosition.z = pos.z + (float)(rg.NextDouble());
     }
 
     public override void UpdateAcceleration(MyParticle p) {
@@ -51,7 +56,7 @@ public class WaterPS : MyParticleSystem {
                     if (p.IsAlive()) {
                         NumAliveParticles++;
                         p.LifeTime -= p.LifeTimeDelta;
-                        if (p.LifeTime < 0) p.LifeTime = 0.0f;
+                        if (p.LifeTime < 0.0f) p.LifeTime = 0.0f;
                         UpdatePreviousValues(p);
                         UpdateMaterial(p);
                         UpdateSize(p);

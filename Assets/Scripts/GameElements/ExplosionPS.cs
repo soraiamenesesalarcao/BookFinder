@@ -3,6 +3,10 @@ using System.Collections;
 
 public class ExplosionPS : MyParticleSystem {
 
+    protected override void InitLifeTime(MyParticle p) {
+        p.LifeTime = 1.0f;
+    }
+
     public override void InitFormulas() {
         phi = (float)rg.NextDouble() * Mathf.PI;
         theta = (float)rg.NextDouble() * 2 * Mathf.PI;
